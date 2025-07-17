@@ -10,8 +10,9 @@ export default function PlantDetailScreen({ route, navigation }) {
     <View style={styles.container}>
       <Text>Name: {plant.name}</Text>
       <Text>Type: {plant.type}</Text>
-      <Button title="Edit" onPress={() => navigation.navigate('AddEditPlant', { id: plant.id })} />
-      <Button title="Delete" onPress={() => { deletePlant(plant.id); navigation.navigate('Home'); }} />
+      <Button title="Edit Plant" color={"green"} onPress={() => navigation.navigate('AddEditPlant', { id: plant.id })} />
+      <View style={{ height: 10 }} />
+      <Button title="Delete Plant" color={"green"} onPress={() => { deletePlant(plant.id); navigation.navigate('Home'); }} />
     </View>
   );
 }

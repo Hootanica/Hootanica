@@ -44,9 +44,10 @@ export default function AddEditPlantScreen({ navigation, route }) {
     <View style={styles.container}>
       <TextInput placeholder="Name" value={name} onChangeText={setName} style={styles.input} />
       <TextInput placeholder="Type" value={type} onChangeText={setType} style={styles.input} />
-      <Button title="Pick Photo" onPress={pickImage} />
+      <Button title="Add Plant Picture" color={"green"} onPress={pickImage} />
       {photo && <Image source={{ uri: photo }} style={styles.image} />}
-      <Button title="Save" onPress={save} />
+      <View style={{ height: 10 }} />
+      <Button title="Save Plant" color={"green"} onPress={save} />
     </View>
   );
 }

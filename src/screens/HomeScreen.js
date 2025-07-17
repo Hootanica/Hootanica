@@ -15,7 +15,7 @@ export default function HomeScreen({ navigation }) {
           <PlantCard plant={item} onPress={() => navigation.navigate('PlantDetail', { id: item.id })} />
         )}
       />
-      <Button title="Add Plant" onPress={() => navigation.navigate('AddEditPlant')} />
+      <Button title="Add Plant" color={"green"} onPress={() => navigation.navigate('AddEditPlant')} />
     </View>
   );
 }
