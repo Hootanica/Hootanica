@@ -10,13 +10,13 @@ export default function PlantDetailScreen({ route, navigation }) {
     <View style={styles.container}>
       <Text>Name: {plant.name}</Text>
       <Text>Type: {plant.type}</Text>
-      <Button title="Edit Plant" color={"green"} onPress={() => navigation.navigate('AddEditPlant', { id: plant.id })} />
+      <Button title="Edit Plant" color={"#074407ff"} onPress={() => navigation.navigate('AddEditPlant', { id: plant.id })} />
       <View style={{ height: 10 }} />
-      <Button title="Delete Plant" color={"green"} onPress={() => { deletePlant(plant.id); navigation.navigate('Home'); }} />
+      <Button title="Delete Plant" color={"#074407ff"} onPress={() => { deletePlant(plant.id); navigation.navigate('Home'); }} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
+  container: { flex: 1, padding: 16, backgroundColor: '#d1f8d1ff' },
 });

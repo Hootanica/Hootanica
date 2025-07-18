@@ -44,16 +44,16 @@ export default function AddEditPlantScreen({ navigation, route }) {
     <View style={styles.container}>
       <TextInput placeholder="Name" value={name} onChangeText={setName} style={styles.input} />
       <TextInput placeholder="Type" value={type} onChangeText={setType} style={styles.input} />
-      <Button title="Add Plant Picture" color={"green"} onPress={pickImage} />
+      <Button title="Add Plant Picture" color={"#074407ff"} onPress={pickImage} />
       {photo && <Image source={{ uri: photo }} style={styles.image} />}
       <View style={{ height: 10 }} />
-      <Button title="Save Plant" color={"green"} onPress={save} />
+      <Button title="Save Plant" color={"#074407ff"} onPress={save} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
+  container: { flex: 1, padding: 16, backgroundColor: '#d1f8d1ff' },
   input: { borderWidth: 1, borderColor: '#ccc', padding: 8, marginBottom: 8 },
   image: { width: 100, height: 100, marginVertical: 8 },
 });

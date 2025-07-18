@@ -19,4 +19,4 @@ export default function InstructionsScreen() {
   );
 }
 
-const styles = StyleSheet.create({ container: { flex: 1, padding: 16 } });
+const styles = StyleSheet.create({ container: { flex: 1, padding: 16, backgroundColor: '#d1f8d1ff' } });
