@@ -8,7 +8,11 @@ export default function PlantDetailScreen({ route, navigation }) {
 
   useEffect(() => {
     if (!plant) {
-      navigation.goBack();
+      if (navigation.canGoBack()) {
+        navigation.goBack();
+      } else {
+        navigation.navigate('Home');
+      }
     }
   }, [plant]);
 
@@ -22,8 +26,12 @@ export default function PlantDetailScreen({ route, navigation }) {
         title="Delete Plant"
         color="#074407ff"
         onPress={() => {
-          navigation.goBack();
           deletePlant(plant.id);
+          if (navigation.canGoBack()) {
+            navigation.goBack();
+          } else {
+            navigation.navigate('Home');
+          }
         }}
       />
     </View>
