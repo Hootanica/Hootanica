@@ -1,5 +1,6 @@
 // PLEASE NOTE: The code to construct the calendar (the part where it displays the months at the top) was found online, and was changed to fit the needs of this app
 // Find the code used here: https://github.com/mendsalbert/medicine-reminder-app/blob/main/app/calendar/index.tsx
+// Find youtube video tutorial I used here: https://www.youtube.com/watch?v=fcpZeYeINDw&t=18612s
 
 import React, { useContext, useState, useCallback } from 'react';
 import { View, FlatList, StyleSheet, Text, TouchableOpacity, ScrollView, Platform } from 'react-native';
