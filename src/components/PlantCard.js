@@ -10,6 +10,8 @@ export default function PlantCard({ plant, onPress }) {
       <View style={styles.info}>
         <Text style={styles.name}>{plant.name}</Text>
         <Text style={styles.type}>{plant.type}</Text>
+        <Text style={styles.meta}>Created: {plant.dateCreated}</Text>
+        <Text style={styles.meta}>Water every {plant.wateringFrequency} days</Text>
       </View>
     </TouchableOpacity>
   );

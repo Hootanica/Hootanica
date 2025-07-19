@@ -20,6 +20,8 @@ export default function PlantDetailScreen({ route, navigation }) {
     <View style={styles.container}>
       <Text>Name: {plant?.name}</Text>
       <Text>Type: {plant?.type}</Text>
+      <Text>Date Created: {plant?.dateCreated}</Text>
+      <Text>Water every {plant?.wateringFrequency} days</Text>
       <Button title="Edit Plant" color={"#074407ff"} onPress={() => navigation.navigate('AddEditPlant', { id: plant.id })} />
       <View style={{ height: 10 }} />
       <Button

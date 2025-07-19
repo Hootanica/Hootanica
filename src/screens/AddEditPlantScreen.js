@@ -8,6 +8,8 @@ export default function AddEditPlantScreen({ navigation, route }) {
   const [name, setName] = useState('');
   const [type, setType] = useState('');
   const [photo, setPhoto] = useState(null);
+  const [dateCreated, setDateCreated] = useState(new Date().toISOString().split('T')[0]);
+  const [wateringFrequency, setWateringFrequency] = useState('');
 
   const editingId = route.params?.id;
 
@@ -18,6 +20,8 @@ export default function AddEditPlantScreen({ navigation, route }) {
         setName(plant.name);
         setType(plant.type);
         setPhoto(plant.photo);
+        setDateCreated(plant.dateCreated);
+        setWateringFrequency(plant.wateringFrequency?.toString() || '');
       }
     }
   }, [editingId]);
@@ -34,7 +38,14 @@ export default function AddEditPlantScreen({ navigation, route }) {
   };
 
   const save = () => {
-    const plant = { id: editingId || Date.now(), name, type, photo };
+    const plant = {
+      id: editingId || Date.now(),
+      name,
+      type,
+      photo,
+      dateCreated,
+      wateringFrequency: parseInt(wateringFrequency, 10) || 0,
+    };
     if (editingId) editPlant(plant);
     else addPlant(plant);
     navigation.goBack();
@@ -44,6 +55,8 @@ export default function AddEditPlantScreen({ navigation, route }) {
     <View style={styles.container}>
       <TextInput placeholder="Name" value={name} onChangeText={setName} style={styles.input} />
       <TextInput placeholder="Type" value={type} onChangeText={setType} style={styles.input} />
+      <TextInput placeholder="Date Created (YYYY-MM-DD)" value={dateCreated} onChangeText={setDateCreated} style={styles.input} />
+      <TextInput placeholder="Watering Frequency (days)" value={wateringFrequency} onChangeText={setWateringFrequency} style={styles.input} keyboardType="numeric" />
       <Button title="Add Plant Picture" color={"#074407ff"} onPress={pickImage} />
       {photo && <Image source={{ uri: photo }} style={styles.image} />}
       <View style={{ height: 10 }} />
