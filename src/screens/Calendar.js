@@ -107,6 +107,11 @@ export default function CalendarView({ navigation }) {
     }
 
     return neededToBeWatered.map((plant) => (
+
+    <TouchableOpacity
+    key={plant.id}
+    onPress={() => navigation.navigate('PlantDetail', { id: plant.id })}
+  >
     <View style={styles.plantBanner} key={plant.id} >
       <Text style={styles.name}>{plant.name}</Text>
       <Text style={styles.type}>
@@ -116,6 +121,7 @@ export default function CalendarView({ navigation }) {
         Frequency: every {plant.wateringFrequency} days
       </Text>
     </View>
+    </TouchableOpacity>
   ));
     
   };
@@ -185,8 +191,10 @@ export default function CalendarView({ navigation }) {
           </View>
 
           {renderCalendar()}
+          
         </View>
         </ScrollView>
+
 
 
         <View style={styles.scheduleContainer}>
@@ -197,11 +205,13 @@ export default function CalendarView({ navigation }) {
               day: "numeric",
             })}
           </Text>
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <ScrollView showsVerticalScrollIndicator={true} >
             {renderPlantsForDate()}
           </ScrollView>
 
+
         </View>
+
       </View>
     </View>
 
