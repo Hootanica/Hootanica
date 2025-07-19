@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { View, TextInput, Button, StyleSheet, Image, Text } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Image, Text, ScrollView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import PlantContext from '../context/PlantContext';
 import { Picker } from '@react-native-picker/picker';
@@ -63,6 +63,7 @@ export default function AddEditPlantScreen({ navigation, route }) {
   };
 
   return (
+<ScrollView style ={styles.scrollView}>
   <View style={styles.container}>
     <Text style={styles.title}>Add or Edit Plant</Text>
 
@@ -115,6 +116,9 @@ export default function AddEditPlantScreen({ navigation, route }) {
     <View style={{ height: 10 }} />
     <Button title="Save Plant" color="#074407ff" onPress={save} />
   </View>
+
+  </ScrollView>
+
 );
 }
 const styles = StyleSheet.create({
@@ -169,4 +173,7 @@ const styles = StyleSheet.create({
     marginVertical: 12,
     borderRadius: 8,
   },
+  scrollView: {
+    backgroundColor: '#d1f8d1ff',
+  }
 });
