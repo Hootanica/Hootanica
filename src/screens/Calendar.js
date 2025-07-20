@@ -27,17 +27,18 @@ export default function CalendarView({ navigation }) {
 
   const { days, firstDay } = getDaysInMonth(selectedDate);
 
-  const renderCalendar = () => {
-    const calendar = [];
-    let week = [];
+const renderCalendar = () => {
+  const calendar = [];
+  let week = [];
 
-    // Add empty cells before first day of the month
-    for (let i = 0; i < firstDay; i++) {
+  const totalCells = firstDay + days; // total slots (empty + actual days)
+
+  for (let i = 0; i < totalCells; i++) {
+    if (i < firstDay) {
+      // Empty slots before the first day of the month
       week.push(<View key={`empty-${i}`} style={styles.calendarDay} />);
-    }
-
-    // Add day cells
-    for (let day = 1; day <= days; day++) {
+    } else {
+      const day = i - firstDay + 1;
       const date = new Date(
         selectedDate.getFullYear(),
         selectedDate.getMonth(),
@@ -51,22 +52,36 @@ export default function CalendarView({ navigation }) {
           style={[styles.calendarDay, isToday && styles.today]}
           onPress={() => setSelectedDate(date)}
         >
-          <Text style={[styles.dayText, isToday && styles.todayText]}>{day}</Text>
+          <Text style={[styles.dayText, isToday && styles.todayText]}>
+            {day}
+          </Text>
         </TouchableOpacity>
       );
-
-      if ((firstDay + day) % 7 === 0 || day === days) {
-        calendar.push(
-          <View key={day} style={styles.calendarWeek}>
-            {week}
-          </View>
-        );
-        week = [];
-      }
     }
 
-    return calendar;
-  };
+    // Complete the week row after 7 elements
+    if ((i + 1) % 7 === 0) {
+      calendar.push(
+        <View key={`week-${i}`} style={styles.calendarWeek}>
+          {week}
+        </View>
+      );
+      week = [];
+    }
+  }
+
+  // Push the last incomplete week
+  if (week.length > 0) {
+    calendar.push(
+      <View key="last-week" style={styles.calendarWeek}>
+        {week}
+      </View>
+    );
+  }
+
+  return calendar;
+};
+
 
   // Render plants scheduled for the selected date (example implementation)
   const renderPlantsForDate = () => {
@@ -196,7 +211,6 @@ export default function CalendarView({ navigation }) {
         </ScrollView>
 
 
-
         <View style={styles.scheduleContainer}>
           <Text style={styles.scheduleTitle}>
             {selectedDate.toLocaleDateString("default", {
@@ -205,14 +219,20 @@ export default function CalendarView({ navigation }) {
               day: "numeric",
             })}
           </Text>
-          <ScrollView showsVerticalScrollIndicator={true} >
-            {renderPlantsForDate()}
-          </ScrollView>
+         
+            <ScrollView showsVerticalScrollIndicator={true}
+              contentContainerStyle={styles.scrollViewContent}
+>
+    {renderPlantsForDate()}
+  </ScrollView>
+          
 
 
         </View>
 
+
       </View>
+
     </View>
 
   );
@@ -326,6 +346,9 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 2,
   },
+  scrollViewContent: {
+  flexGrow: 1,
+},
   scheduleTitle: {
     fontSize: 20,
     fontWeight: "700",

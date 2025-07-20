@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import PlantContext from '../context/PlantContext';
 
 export default function PlantDetailScreen({ route, navigation }) {
@@ -16,30 +16,109 @@ export default function PlantDetailScreen({ route, navigation }) {
     }
   }, [plant]);
 
+  const handleDelete = () => {
+    Alert.alert(
+      'Delete Plant',
+      'Are you sure you want to delete this plant?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => {
+            deletePlant(plant.id);
+            navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Home');
+          }
+        }
+      ]
+    );
+  };
+
+  if (!plant) return null;
+
   return (
     <View style={styles.container}>
-      <Text>Name: {plant?.name}</Text>
-      <Text>Type: {plant?.type}</Text>
-      <Text>Date Created: {plant?.dateCreated}</Text>
-      <Text>Water every {plant?.wateringFrequency} days</Text>
-      <Button title="Edit Plant" color={"#074407ff"} onPress={() => navigation.navigate('AddEditPlant', { id: plant.id })} />
-      <View style={{ height: 10 }} />
-      <Button
-        title="Delete Plant"
-        color="#074407ff"
-        onPress={() => {
-          deletePlant(plant.id);
-          if (navigation.canGoBack()) {
-            navigation.goBack();
-          } else {
-            navigation.navigate('Home');
-          }
-        }}
-      />
+      <View style={styles.card}>
+        <Text style={styles.title}>{plant.name}</Text>
+        <Text style={styles.detail}>Type: <Text style={styles.detailValue}>{plant.type}</Text></Text>
+        <Text style={styles.detail}>Date Created: <Text style={styles.detailValue}>{plant.dateCreated}</Text></Text>
+        <Text style={styles.detail}>Water every <Text style={styles.detailValue}>{plant.wateringFrequency} days</Text></Text>
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.buttonPrimary}
+            onPress={() => navigation.navigate('AddEditPlant', { id: plant.id })}
+          >
+            <Text style={styles.buttonText}>Edit Plant</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.buttonSecondary}
+            onPress={handleDelete}
+          >
+            <Text style={styles.buttonText}>Delete Plant</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#d1f8d1ff' },
+  container: {
+    flex: 1,
+    backgroundColor: '#d1f8d1',  // mint green
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 24,
+    width: '100%',
+    maxWidth: 400,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#2f5233',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  detail: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 10,
+  },
+  detailValue: {
+    fontWeight: '600',
+    color: '#555',
+  },
+  buttonContainer: {
+    marginTop: 30,
+  },
+  buttonPrimary: {
+    backgroundColor: '#a8d5ba', // pastel green
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  buttonSecondary: {
+    backgroundColor: '#f6b7b1', // pastel blush red
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#333',
+    fontWeight: '600',
+    fontSize: 16,
+  },
 });
