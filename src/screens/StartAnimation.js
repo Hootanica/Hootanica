@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 
-const animationFrames = [];
+const flowerFrames = [
+  require('../../assets/Hootanica1.png'),
+  require('../../assets/Hootanica2.png'),
+  require('../../assets/Hootanica3.png'),
+  require('../../assets/Hootanica4.png'),
+  require('../../assets/Hootanica5.png'),
+];
 
 export default function StartingAnimationScreen({ navigation }) {
   const [currentFrame, setCurrentFrame] = useState(0);
@@ -21,7 +27,7 @@ export default function StartingAnimationScreen({ navigation }) {
           return prev;
         }
       });
-    }, 500); // frame change every 500ms
+    }, 1000); // frame change every 500ms
 
     return () => clearInterval(interval);
   }, []);
@@ -40,12 +46,12 @@ export default function StartingAnimationScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eaffea',
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
   image: {
-    width: 300,
-    height: 300,
+    width: 700,
+    height: 700,
   },
 });
