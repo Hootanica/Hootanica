@@ -26,7 +26,11 @@ export default function HomeScreen({ navigation }) {
       <Button title="Add Plant" color={"#074407ff"} onPress={() => navigation.navigate('AddEditPlant')} />
       <View style={{ height: 10 }} />
       <Button title="User Help" color={"#074407ff"} onPress={() => navigation.navigate('Instructions')} />
+      <View style={{ height: 10 }} />
+      <Button title="Calendar" color={"#074407ff"} onPress={() => navigation.navigate('Calendar')} />
       </View>
+
+
     </SafeAreaView>
   );
 }
