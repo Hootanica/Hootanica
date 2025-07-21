@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform } from 'react-native';
 import PlantContext from '../context/PlantContext';
 
 export default function PlantDetailScreen({ route, navigation }) {
@@ -17,21 +17,26 @@ export default function PlantDetailScreen({ route, navigation }) {
   }, [plant]);
 
   const handleDelete = () => {
-    Alert.alert(
-      'Delete Plant',
-      'Are you sure you want to delete this plant?',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: () => {
-            deletePlant(plant.id);
-            navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Home');
-          }
-        }
-      ]
-    );
+    const doDelete = () => {
+      deletePlant(plant.id);
+      navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Home');
+    };
+
+    if (Platform.OS === 'web') {
+      if (window.confirm('Are you sure you want to delete this plant?')) {
+        doDelete();
+      }
+    } else {
+      Alert.alert(
+        'Delete Plant',
+        'Are you sure you want to delete this plant?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Delete', style: 'destructive', onPress: doDelete },
+        ],
+        { cancelable: true }
+      );
+    }
   };
 
   if (!plant) return null;
