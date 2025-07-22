@@ -48,6 +48,7 @@ export default function PlantDetailScreen({ route, navigation }) {
         <Text style={styles.detail}>Type: <Text style={styles.detailValue}>{plant.type}</Text></Text>
         <Text style={styles.detail}>Date Created: <Text style={styles.detailValue}>{plant.dateCreated}</Text></Text>
         <Text style={styles.detail}>Water every <Text style={styles.detailValue}>{plant.wateringFrequency} days</Text></Text>
+        <Text style={styles.detail}>Fertilizer Requirements: <Text style={styles.detailValue}>{plant.fertReq}</Text></Text>
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity

@@ -18,6 +18,7 @@ export default function AddEditPlantScreen({ navigation, route }) {
   const [photo, setPhoto] = useState(null);
   const [dateCreated, setDateCreated] = useState(new Date().toISOString().split('T')[0]);
   const [wateringFrequency, setWateringFrequency] = useState(1);
+  const [fertReq, setFertilizerRequirements] = useState('');
 
  
 
@@ -33,6 +34,7 @@ export default function AddEditPlantScreen({ navigation, route }) {
         setPhoto(plant.photo);
         setDateCreated(plant.dateCreated);
         setWateringFrequency(plant.wateringFrequency);
+        setFertilizerRequirements(plant.fertReq);
       }
     }
   }, [editingId]);
@@ -56,6 +58,7 @@ export default function AddEditPlantScreen({ navigation, route }) {
       photo,
       dateCreated,
       wateringFrequency,
+      fertReq,
     };
     if (editingId) editPlant(plant);
     else addPlant(plant);
@@ -108,6 +111,16 @@ export default function AddEditPlantScreen({ navigation, route }) {
           <Picker.Item key={number} label={`${number}`} value={number} />
         ))}
       </Picker>
+    </View>
+
+    <View style={styles.formGroup}>
+      <Text style={styles.label}>Fertilizer Requirements:</Text>
+      <TextInput 
+        placeholder="Enter fertilizer requirements" 
+        value={fertReq} 
+        onChangeText={setFertilizerRequirements} 
+        style={styles.input} 
+      />
     </View>
 
     <Button title="Add Plant Picture" color="#074407ff" onPress={pickImage} />
