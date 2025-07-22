@@ -13,6 +13,7 @@ export default function PlantCard({ plant, onPress }) {
         <Text style={styles.meta}>Created: {plant.dateCreated}</Text>
         <Text style={styles.meta}>Water every {plant.wateringFrequency} days</Text>
         <Text style={styles.meta}>Fertilizer Requirements: {plant.fertReq}</Text>
+        <Text style={styles.meta}>Soil Requirements: {plant.soilReq}</Text>
       </View>
     </TouchableOpacity>
   );

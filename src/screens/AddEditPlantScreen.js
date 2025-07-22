@@ -19,6 +19,7 @@ export default function AddEditPlantScreen({ navigation, route }) {
   const [dateCreated, setDateCreated] = useState(new Date().toISOString().split('T')[0]);
   const [wateringFrequency, setWateringFrequency] = useState(1);
   const [fertReq, setFertilizerRequirements] = useState('');
+  const [soilReq, setSoilRequirements] = useState('');
 
  
 
@@ -35,6 +36,7 @@ export default function AddEditPlantScreen({ navigation, route }) {
         setDateCreated(plant.dateCreated);
         setWateringFrequency(plant.wateringFrequency);
         setFertilizerRequirements(plant.fertReq);
+        setSoilRequirements(plant.soilReq);
       }
     }
   }, [editingId]);
@@ -59,6 +61,7 @@ export default function AddEditPlantScreen({ navigation, route }) {
       dateCreated,
       wateringFrequency,
       fertReq,
+      soilReq,
     };
     if (editingId) editPlant(plant);
     else addPlant(plant);
@@ -119,6 +122,16 @@ export default function AddEditPlantScreen({ navigation, route }) {
         placeholder="Enter fertilizer requirements" 
         value={fertReq} 
         onChangeText={setFertilizerRequirements} 
+        style={styles.input} 
+      />
+    </View>
+
+    <View style={styles.formGroup}>
+      <Text style={styles.label}>Soil Requirements:</Text>
+      <TextInput 
+        placeholder="Enter soil requirements" 
+        value={soilReq} 
+        onChangeText={setSoilRequirements} 
         style={styles.input} 
       />
     </View>
