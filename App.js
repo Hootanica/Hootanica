@@ -1,15 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { PlantProvider } from './src/context/PlantContext';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppNavigator from './src/navigation/AppNavigator';
 
 export default function App() {
   return (
     <PlantProvider>
-      <AppNavigator />
-      <StatusBar style="auto" />
+      <SafeAreaProvider>
+        <AppNavigator />
+        <StatusBar style="auto" />
+      </SafeAreaProvider>
     </PlantProvider>
   );
 }
-
-// No local styles needed as navigation handles styling

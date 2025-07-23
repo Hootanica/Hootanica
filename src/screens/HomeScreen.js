@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import { View, FlatList, Button, StyleSheet, Text, SafeAreaView } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PlantContext from '../context/PlantContext';
 import PlantCard from '../components/PlantCard';
 
 export default function HomeScreen({ navigation }) {
   const { plants } = useContext(PlantContext);
+  const insets = useSafeAreaInsets();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { paddingBottom: insets.bottom }]}>
       <View></View>
       <FlatList
         data={plants}
@@ -22,7 +24,7 @@ export default function HomeScreen({ navigation }) {
         }
       />
 
-      <View style={styles.buttonContainer}>
+      <View style={[styles.buttonContainer, { bottom: 16 + insets.bottom }]}>
       <Button title="Add Plant" color={"#074407ff"} onPress={() => navigation.navigate('AddEditPlant')} />
       <View style={{ height: 10 }} />
       <Button title="User Help" color={"#074407ff"} onPress={() => navigation.navigate('Instructions')} />
