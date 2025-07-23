@@ -28,6 +28,11 @@ export default function InstructionsScreen() {
       <View style={[styles.oval, styles.oval4]} />
       <View style={[styles.oval, styles.oval5]} />
       <View style={[styles.oval, styles.oval6]} />
+      <View style={[styles.oval, styles.oval7]} />
+
+      <View style={[styles.oval, styles.oval8]} />
+      <View style={[styles.oval, styles.oval9]} />
+      <View style={[styles.oval, styles.oval10]} />
 
       {/* Header */}
       <Markdown style={markdownStyles}>{header}</Markdown>
@@ -52,31 +57,33 @@ const styles = StyleSheet.create({
 
   oval: {
     position: 'absolute',
-    backgroundColor: '#90EE90', // Light green
-    width: 20,
-    height: 10,
+    backgroundColor: '#bee5b0', // Light green
+    width: 30,
+    height: 17,
     borderRadius: 10,
     opacity: 0.8,
   },
 
-  // Top-left ovals
-  oval1: { top: 10, left: 10, transform: [{ rotate: '15deg' }] },
-  oval2: { top: 30, left: 25, transform: [{ rotate: '-10deg' }] },
-  oval3: { top: 50, left: 5, transform: [{ rotate: '25deg' }] },
-
-  // Top-right ovals
-  oval4: { top: 10, right: 10, transform: [{ rotate: '-20deg' }] },
-  oval5: { top: 30, right: 25, transform: [{ rotate: '10deg' }] },
-  oval6: { top: 50, right: 5, transform: [{ rotate: '-30deg' }] },
+  // Leaf Ovals
+  oval1: { top: 10, left: 45, transform: [{ rotate: '53deg' }] },
+  oval2: { top: 35, left: 10, transform: [{ rotate: '-70deg' }] },
+  oval3: { top: 50, left: 90, transform: [{ rotate: '75deg' }] },
+  oval4: { top: 10, right: 10, transform: [{ rotate: '53deg' }] },
+  oval5: { top: 30, right: 195, transform: [{ rotate: '-70deg' }] },
+  oval6: { top: 50, right: 150, transform: [{ rotate: '75deg' }] },
+  oval7: { top: 30, right: 75, transform: [{ rotate: '53deg' }] },
+  oval8: { top: 25, right: 240, transform: [{ rotate: '53deg' }] },
+  oval9: { top: 10, right: 115, transform: [{ rotate: '-70deg' }] },
+  oval10: { top: 45, right: 30, transform: [{ rotate: '-53deg' }] },
 });
 
 const markdownStyles = {
   heading1: {
-    color: '#01796F', // Pine green
+    color: '#476f4d', // Pine green
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 60,
+    marginTop: 80,
   },
   bullet_list: {
     fontSize: 18,
