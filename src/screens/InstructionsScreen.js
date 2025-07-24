@@ -6,10 +6,12 @@ const header = `# Welcome to Hootanica!`;
 
 const instructions = `
 Add a plant with its name, type, and photo.
-Click the "Add Plant" button, and then fill out the fields with the required information.
+Click the "Add Plant" button. 
+Fill out the fields with the required information.
 
 Edit or delete existing plants.
-Click on the desired plant in the Home Page, and then click "Edit Plant" or "Delete Plant" as desired.
+Click on the desired plant in the Home Page. 
+Click "Edit Plant" or "Delete Plant" as desired.
 
 View plant details and care logs.
 
