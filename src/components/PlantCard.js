@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 12,
     marginVertical: 8,
-    backgroundColor: '#fff',
+    backgroundColor: '#eedac9ff', //'#bd9a7a',
     borderRadius: 8,
     elevation: 2,
-    shadowColor: '#000',
+    shadowColor: '#654321', //'#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+    shadowRadius: 5, //1.41,
   },
   image: {
     width: 50,
@@ -49,9 +49,10 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: 'black',
   },
   type: {
     fontSize: 14,
-    color: '#666',
+    color: '#1c6113ff',
   },
 });

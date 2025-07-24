@@ -1,5 +1,12 @@
 import React, { useContext } from 'react';
-import { View, FlatList, Button, StyleSheet, Text, SafeAreaView } from 'react-native';
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
 import PlantContext from '../context/PlantContext';
 import PlantCard from '../components/PlantCard';
 
@@ -8,29 +15,46 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View></View>
       <FlatList
         data={plants}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <PlantCard plant={item} onPress={() => navigation.navigate('PlantDetail', { id: item.id })} />
+          <PlantCard
+            plant={item}
+            onPress={() => navigation.navigate('PlantDetail', { id: item.id })}
+          />
         )}
-
-        contentContainerStyle={[styles.listContainer, plants.length === 0 && styles.emptyContainer,]}
+        contentContainerStyle={[
+          styles.listContainer,
+          plants.length === 0 && styles.emptyContainer,
+        ]}
         ListEmptyComponent={
           <Text style={styles.emptyText}>No plants yet. Add your first one!</Text>
         }
       />
 
       <View style={styles.buttonContainer}>
-      <Button title="Add Plant" color={"#074407ff"} onPress={() => navigation.navigate('AddEditPlant')} />
-      <View style={{ height: 10 }} />
-      <Button title="User Help" color={"#074407ff"} onPress={() => navigation.navigate('Instructions')} />
-      <View style={{ height: 10 }} />
-      <Button title="Calendar" color={"#074407ff"} onPress={() => navigation.navigate('Calendar')} />
+        <TouchableOpacity
+          style={styles.customButton}
+          onPress={() => navigation.navigate('AddEditPlant')}
+        >
+          <Text style={styles.buttonText}>Add Plant</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.customButton}
+          onPress={() => navigation.navigate('Instructions')}
+        >
+          <Text style={styles.buttonText}>User Help</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.customButton}
+          onPress={() => navigation.navigate('Calendar')}
+        >
+          <Text style={styles.buttonText}>Calendar</Text>
+        </TouchableOpacity>
       </View>
-
-
     </SafeAreaView>
   );
 }
@@ -39,7 +63,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#d1f8d1ff', // light green
+    backgroundColor: 'white',
   },
   listContainer: {
     paddingHorizontal: 16,
@@ -50,6 +74,18 @@ const styles = StyleSheet.create({
     bottom: 16,
     left: 16,
     right: 16,
+  },
+  customButton: {
+    backgroundColor: '#99c08aff', // light green
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  buttonText: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   emptyContainer: {
     flex: 1,
