@@ -6,12 +6,16 @@ const header = `# Welcome to Hootanica!`;
 
 const instructions = `
 Add a plant with its name, type, and photo.
+Click the "Add Plant" button, and then fill out the fields with the required information.
 
 Edit or delete existing plants.
+Click on the desired plant in the Home Page, and then click "Edit Plant" or "Delete Plant" as desired.
 
 View plant details and care logs.
 
 View plant care schedules in a calendar.
+Click the "Calendar" button to access the calendar.
+Click on any day in the calendar to view the schedule for that day.
 
 Receive notifications for watering and fertilizing.
 `;
