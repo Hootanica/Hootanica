@@ -20,6 +20,10 @@ export default function AddEditPlantScreen({ navigation, route }) {
   const [wateringFrequency, setWateringFrequency] = useState(1);
   const [fertReq, setFertilizerRequirements] = useState('');
   const [soilReq, setSoilRequirements] = useState('');
+  const[sunReq, setSunRequirements] = useState('');
+  const[disHist, setDisHist] = useState('');
+  const[disease, setDisease] = useState('');
+  const[treatment, setTreatment] = useState('');
 
  
 
@@ -37,6 +41,10 @@ export default function AddEditPlantScreen({ navigation, route }) {
         setWateringFrequency(plant.wateringFrequency);
         setFertilizerRequirements(plant.fertReq);
         setSoilRequirements(plant.soilReq);
+        setSunRequirements(plant.sunReq);
+        setDisHist(plant.disHist);
+        setDisease(plant.disease);
+        setTreatment(plant.treatment);
       }
     }
   }, [editingId]);
@@ -62,6 +70,10 @@ export default function AddEditPlantScreen({ navigation, route }) {
       wateringFrequency,
       fertReq,
       soilReq,
+      sunReq,
+      disHist,
+      disease,
+      treatment,
     };
     if (editingId) editPlant(plant);
     else addPlant(plant);
@@ -132,6 +144,46 @@ export default function AddEditPlantScreen({ navigation, route }) {
         placeholder="Enter soil requirements" 
         value={soilReq} 
         onChangeText={setSoilRequirements} 
+        style={styles.input} 
+      />
+    </View>
+
+    <View style={styles.formGroup}>
+      <Text style={styles.label}>Sunlight Requirements:</Text>
+      <TextInput 
+        placeholder="Enter sunlight requirements" 
+        value={sunReq} 
+        onChangeText={setSunRequirements} 
+        style={styles.input} 
+      />
+    </View>
+
+    <View style={styles.formGroup}>
+      <Text style={styles.label}>Disease History:</Text>
+      <TextInput 
+        placeholder="Enter disease history with date occurred if known" 
+        value={disHist} 
+        onChangeText={setDisHist} 
+        style={styles.input} 
+      />
+    </View>
+
+    <View style={styles.formGroup}>
+      <Text style={styles.label}>Possible Diseases:</Text>
+      <TextInput 
+        placeholder="Enter possible diseases" 
+        value={disease} 
+        onChangeText={setDisease} 
+        style={styles.input} 
+      />
+    </View>
+
+    <View style={styles.formGroup}>
+      <Text style={styles.label}>Disease Treatments:</Text>
+      <TextInput 
+        placeholder="Enter treatments for diseases" 
+        value={treatment} 
+        onChangeText={setTreatment} 
         style={styles.input} 
       />
     </View>
