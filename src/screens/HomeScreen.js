@@ -19,23 +19,26 @@ export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden={false} backgroundColor="white" barStyle="dark-content" />
-      <FlatList
-        data={plants}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <PlantCard
-            plant={item}
-            onPress={() => navigation.navigate('PlantDetail', { id: item.id })}
-          />
-        )}
-        contentContainerStyle={[
-          styles.listContainer,
-          plants.length === 0 && styles.emptyContainer,
-        ]}
-        ListEmptyComponent={
-          <Text style={styles.emptyText}>No plants yet. Add your first one!</Text>
-        }
-      />
+      <View style={styles.listSection}>
+        <FlatList
+          data={plants}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <PlantCard
+              plant={item}
+              onPress={() => navigation.navigate('PlantDetail', { id: item.id })}
+            />
+          )}
+          contentContainerStyle={[
+            styles.listContainer,
+            plants.length === 0 && styles.emptyContainer,
+          ]}
+          ListEmptyComponent={
+            <Text style={styles.emptyText}>No plants yet. Add your first one!</Text>
+          }
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
 
       <View style={[styles.buttonContainer, { paddingBottom: insets.bottom }]}>
         <TouchableOpacity
@@ -66,18 +69,22 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
     backgroundColor: 'white',
   },
-  listContainer: {
+  listSection: {
+    flex: 1,
     paddingHorizontal: 16,
-    paddingBottom: 80,
+    paddingTop: 16,
+  },
+  listContainer: {
+    paddingBottom: 20,
   },
   buttonContainer: {
-    position: 'absolute',
-    bottom: 16,
-    left: 16,
-    right: 16,
+    backgroundColor: 'white',
+    paddingHorizontal: 16,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#f0f0f0',
   },
   customButton: {
     backgroundColor: '#99c08aff', // light green
