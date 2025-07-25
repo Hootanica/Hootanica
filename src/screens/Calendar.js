@@ -14,7 +14,7 @@ const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 export default function CalendarView({ navigation }) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showSchedule, setShowSchedule] = useState(false);
-  const slideAnim = useRef(new Animated.Value(300)).current;
+  const slideAnim = useRef(new Animated.Value(500)).current;
 
   const { plants } = useContext(PlantContext);
 
@@ -32,14 +32,13 @@ export default function CalendarView({ navigation }) {
   };
 
   const handleCloseSchedule = () => {
+    setShowSchedule(false);
     Animated.spring(slideAnim, {
-      toValue: 300,
+      toValue: 500,
       useNativeDriver: true,
       tension: 100,
       friction: 8,
-    }).start(() => {
-      setShowSchedule(false);
-    });
+    }).start();
   };
 
   const getDaysInMonth = (date) => {
