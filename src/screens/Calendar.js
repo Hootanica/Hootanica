@@ -105,6 +105,10 @@ const renderCalendar = () => {
 
   // Push the last incomplete week
   if (week.length > 0) {
+    while (week.length < 7) {
+      week.push(<View key={`empty-end-${week.length}`} style={styles.calendarDay} />);
+    }
+    
     calendar.push(
       <View key="last-week" style={styles.calendarWeek}>
         {week}
