@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, StatusBar } from 'react-native';
 
 const flowerFrames = [
   require('../../assets/Hootanica1.png'),
@@ -27,13 +27,14 @@ export default function StartingAnimationScreen({ navigation }) {
           return prev;
         }
       });
-    }, 1000); // frame change every 500ms
+    }, 1000); // frame change every 1000ms
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <View style={styles.container}>
+      <StatusBar hidden={true} />
       <Image
         source={flowerFrames[currentFrame]}
         style={styles.image}

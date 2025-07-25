@@ -6,6 +6,7 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PlantContext from '../context/PlantContext';
@@ -17,6 +18,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar hidden={false} backgroundColor="white" barStyle="dark-content" />
       <FlatList
         data={plants}
         keyExtractor={(item) => item.id.toString()}
