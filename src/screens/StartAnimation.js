@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, StyleSheet, StatusBar } from 'react-native';
+import { View, Image, StyleSheet, StatusBar, Dimensions } from 'react-native';
 
 const flowerFrames = [
   require('../../assets/Hootanica1.png'),
@@ -11,6 +11,8 @@ const flowerFrames = [
 
 export default function StartingAnimationScreen({ navigation }) {
   const [currentFrame, setCurrentFrame] = useState(0);
+  const { width, height } = Dimensions.get('window');
+  const imageSize = Math.min(width, height) * 0.8;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -37,7 +39,7 @@ export default function StartingAnimationScreen({ navigation }) {
       <StatusBar hidden={true} />
       <Image
         source={flowerFrames[currentFrame]}
-        style={styles.image}
+        style={[styles.image, { width: imageSize, height: imageSize }]}
         resizeMode="contain"
       />
     </View>
@@ -50,9 +52,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  image: {
-    width: 700,
-    height: 700,
   },
 });
