@@ -11,15 +11,17 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PlantContext from '../context/PlantContext';
 import PlantCard from '../components/PlantCard';
+import { commonStyles } from '../styles/commonStyles';
 
 export default function HomeScreen({ navigation }) {
   const { plants } = useContext(PlantContext);
   const insets = useSafeAreaInsets();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={commonStyles.container}>
       <StatusBar hidden={false} backgroundColor="white" barStyle="dark-content" />
-      <View style={styles.listSection}>
+      
+      <View style={commonStyles.scrollSection}>
         <FlatList
           data={plants}
           keyExtractor={(item) => item.id.toString()}
@@ -30,7 +32,7 @@ export default function HomeScreen({ navigation }) {
             />
           )}
           contentContainerStyle={[
-            styles.listContainer,
+            commonStyles.scrollContainer,
             plants.length === 0 && styles.emptyContainer,
           ]}
           ListEmptyComponent={
@@ -40,26 +42,26 @@ export default function HomeScreen({ navigation }) {
         />
       </View>
 
-      <View style={[styles.buttonContainer, { paddingBottom: insets.bottom }]}>
+      <View style={[commonStyles.buttonContainer, { paddingBottom: insets.bottom }]}>
         <TouchableOpacity
-          style={styles.customButton}
+          style={commonStyles.primaryButton}
           onPress={() => navigation.navigate('AddEditPlant')}
         >
-          <Text style={styles.buttonText}>Add Plant</Text>
+          <Text style={commonStyles.buttonText}>Add Plant</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.customButton}
+          style={commonStyles.primaryButton}
           onPress={() => navigation.navigate('Instructions')}
         >
-          <Text style={styles.buttonText}>User Help</Text>
+          <Text style={commonStyles.buttonText}>User Help</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.customButton}
+          style={commonStyles.primaryButton}
           onPress={() => navigation.navigate('Calendar')}
         >
-          <Text style={styles.buttonText}>Calendar</Text>
+          <Text style={commonStyles.buttonText}>Calendar</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -67,37 +69,6 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  listSection: {
-    flex: 1,
-    paddingHorizontal: 16,
-    paddingTop: 16,
-  },
-  listContainer: {
-    paddingBottom: 20,
-  },
-  buttonContainer: {
-    backgroundColor: 'white',
-    paddingHorizontal: 16,
-    paddingTop: 10,
-    borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
-  },
-  customButton: {
-    backgroundColor: '#99c08aff', // light green
-    paddingVertical: 12,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  buttonText: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
   emptyContainer: {
     flex: 1,
     padding: 16,

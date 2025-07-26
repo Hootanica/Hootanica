@@ -1,18 +1,31 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { View, TextInput, Button, StyleSheet, Image, Text, ScrollView } from 'react-native';
+import { 
+  View, 
+  TextInput, 
+  StyleSheet, 
+  Image, 
+  Text, 
+  ScrollView, 
+  SafeAreaView, 
+  TouchableOpacity,
+  StatusBar
+} from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as ImagePicker from 'expo-image-picker';
 import PlantContext from '../context/PlantContext';
 import { Picker } from '@react-native-picker/picker';
+import { commonStyles } from '../styles/commonStyles';
 
+const wateringFrequencyOptions = [];
 
- const wateringFrequencyOptions = [];
-
-  for (let i = 1; i <= 30;  i++){
-    wateringFrequencyOptions.push(i)
-  }
+for (let i = 1; i <= 30; i++){
+  wateringFrequencyOptions.push(i)
+}
 
 export default function AddEditPlantScreen({ navigation, route }) {
   const { addPlant, editPlant, plants } = useContext(PlantContext);
+  const insets = useSafeAreaInsets();
+  
   const [name, setName] = useState('');
   const [type, setType] = useState('');
   const [photo, setPhoto] = useState(null);
@@ -20,15 +33,12 @@ export default function AddEditPlantScreen({ navigation, route }) {
   const [wateringFrequency, setWateringFrequency] = useState(1);
   const [fertReq, setFertilizerRequirements] = useState('');
   const [soilReq, setSoilRequirements] = useState('');
-  const[sunReq, setSunRequirements] = useState('');
-  const[disHist, setDisHist] = useState('');
-  const[disease, setDisease] = useState('');
-  const[treatment, setTreatment] = useState('');
-
- 
+  const [sunReq, setSunRequirements] = useState('');
+  const [disHist, setDisHist] = useState('');
+  const [disease, setDisease] = useState('');
+  const [treatment, setTreatment] = useState('');
 
   const editingId = route.params?.id;
-
 
   useEffect(() => {
     if (editingId) {
@@ -81,128 +91,147 @@ export default function AddEditPlantScreen({ navigation, route }) {
   };
 
   return (
-<ScrollView style ={styles.scrollView}>
-  <View style={styles.container}>
-    <Text style={styles.title}>Add or Edit Plant</Text>
+    <SafeAreaView style={commonStyles.container}>
+      <StatusBar hidden={false} backgroundColor="white" barStyle="dark-content" />
+      
+      <View style={commonStyles.scrollSection}>
+        <ScrollView 
+          style={styles.scrollView}
+          contentContainerStyle={commonStyles.scrollContainer}
+          showsVerticalScrollIndicator={false}
+        >
+          <Text style={styles.title}>
+            {editingId ? 'Edit Plant' : 'Add Plant'}
+          </Text>
 
-    <View style={styles.formGroup}>
-      <Text style={styles.label}>Name:</Text>
-      <TextInput 
-        placeholder="Enter plant name" 
-        value={name} 
-        onChangeText={setName} 
-        style={styles.input} 
-      />
-    </View>
+          <View style={styles.formGroup}>
+            <Text style={styles.label}>Name:</Text>
+            <TextInput 
+              placeholder="Enter plant name" 
+              value={name} 
+              onChangeText={setName} 
+              style={styles.input} 
+            />
+          </View>
 
-    <View style={styles.formGroup}>
-      <Text style={styles.label}>Type:</Text>
-      <TextInput 
-        placeholder="Enter plant type" 
-        value={type} 
-        onChangeText={setType} 
-        style={styles.input} 
-      />
-    </View>
+          <View style={styles.formGroup}>
+            <Text style={styles.label}>Type:</Text>
+            <TextInput 
+              placeholder="Enter plant type" 
+              value={type} 
+              onChangeText={setType} 
+              style={styles.input} 
+            />
+          </View>
 
-    <View style={styles.formGroup}>
-      <Text style={styles.label}>Date Created:</Text>
-      <TextInput 
-        placeholder="YYYY-MM-DD" 
-        value={dateCreated} 
-        onChangeText={setDateCreated} 
-        style={styles.input} 
-      />
-    </View>
+          <View style={styles.formGroup}>
+            <Text style={styles.label}>Date Created:</Text>
+            <TextInput 
+              placeholder="YYYY-MM-DD" 
+              value={dateCreated} 
+              onChangeText={setDateCreated} 
+              style={styles.input} 
+            />
+          </View>
 
-    <View style={styles.formGroup}>
-      <Text style={styles.label}>Watering Frequency (days):</Text>
-      <Picker 
-        selectedValue={wateringFrequency}
-        onValueChange={(itemValue) => setWateringFrequency(Number(itemValue))}
-        style={styles.picker}
-      >
-        {wateringFrequencyOptions.map((number) => (
-          <Picker.Item key={number} label={`${number}`} value={number} />
-        ))}
-      </Picker>
-    </View>
+          <View style={styles.formGroup}>
+            <Text style={styles.label}>Watering Frequency (days):</Text>
+            <Picker 
+              selectedValue={wateringFrequency}
+              onValueChange={(itemValue) => setWateringFrequency(Number(itemValue))}
+              style={styles.picker}
+            >
+              {wateringFrequencyOptions.map((number) => (
+                <Picker.Item key={number} label={`${number}`} value={number} />
+              ))}
+            </Picker>
+          </View>
 
-    <View style={styles.formGroup}>
-      <Text style={styles.label}>Fertilizer Requirements:</Text>
-      <TextInput 
-        placeholder="Enter fertilizer requirements" 
-        value={fertReq} 
-        onChangeText={setFertilizerRequirements} 
-        style={styles.input} 
-      />
-    </View>
+          <View style={styles.formGroup}>
+            <Text style={styles.label}>Fertilizer Requirements:</Text>
+            <TextInput 
+              placeholder="Enter fertilizer requirements" 
+              value={fertReq} 
+              onChangeText={setFertilizerRequirements} 
+              style={styles.input} 
+            />
+          </View>
 
-    <View style={styles.formGroup}>
-      <Text style={styles.label}>Soil Requirements:</Text>
-      <TextInput 
-        placeholder="Enter soil requirements" 
-        value={soilReq} 
-        onChangeText={setSoilRequirements} 
-        style={styles.input} 
-      />
-    </View>
+          <View style={styles.formGroup}>
+            <Text style={styles.label}>Soil Requirements:</Text>
+            <TextInput 
+              placeholder="Enter soil requirements" 
+              value={soilReq} 
+              onChangeText={setSoilRequirements} 
+              style={styles.input} 
+            />
+          </View>
 
-    <View style={styles.formGroup}>
-      <Text style={styles.label}>Sunlight Requirements:</Text>
-      <TextInput 
-        placeholder="Enter sunlight requirements" 
-        value={sunReq} 
-        onChangeText={setSunRequirements} 
-        style={styles.input} 
-      />
-    </View>
+          <View style={styles.formGroup}>
+            <Text style={styles.label}>Sunlight Requirements:</Text>
+            <TextInput 
+              placeholder="Enter sunlight requirements" 
+              value={sunReq} 
+              onChangeText={setSunRequirements} 
+              style={styles.input} 
+            />
+          </View>
 
-    <View style={styles.formGroup}>
-      <Text style={styles.label}>Disease History:</Text>
-      <TextInput 
-        placeholder="Enter disease history with date occurred if known" 
-        value={disHist} 
-        onChangeText={setDisHist} 
-        style={styles.input} 
-      />
-    </View>
+          <View style={styles.formGroup}>
+            <Text style={styles.label}>Disease History:</Text>
+            <TextInput 
+              placeholder="Enter disease history with date occurred if known" 
+              value={disHist} 
+              onChangeText={setDisHist} 
+              style={styles.input} 
+            />
+          </View>
 
-    <View style={styles.formGroup}>
-      <Text style={styles.label}>Possible Diseases:</Text>
-      <TextInput 
-        placeholder="Enter possible diseases" 
-        value={disease} 
-        onChangeText={setDisease} 
-        style={styles.input} 
-      />
-    </View>
+          <View style={styles.formGroup}>
+            <Text style={styles.label}>Possible Diseases:</Text>
+            <TextInput 
+              placeholder="Enter possible diseases" 
+              value={disease} 
+              onChangeText={setDisease} 
+              style={styles.input} 
+            />
+          </View>
 
-    <View style={styles.formGroup}>
-      <Text style={styles.label}>Disease Treatments:</Text>
-      <TextInput 
-        placeholder="Enter treatments for diseases" 
-        value={treatment} 
-        onChangeText={setTreatment} 
-        style={styles.input} 
-      />
-    </View>
+          <View style={styles.formGroup}>
+            <Text style={styles.label}>Disease Treatments:</Text>
+            <TextInput 
+              placeholder="Enter treatments for diseases" 
+              value={treatment} 
+              onChangeText={setTreatment} 
+              style={styles.input} 
+            />
+          </View>
 
-    <Button title="Add Plant Picture" color="#074407ff" onPress={pickImage} />
-    {photo && <Image source={{ uri: photo }} style={styles.image} />}
+          {photo && <Image source={{ uri: photo }} style={styles.image} />}
+        </ScrollView>
+      </View>
 
-    <View style={{ height: 10 }} />
-    <Button title="Save Plant" color="#074407ff" onPress={save} />
-  </View>
+      <View style={[commonStyles.buttonContainer, { paddingBottom: insets.bottom }]}>
+        <TouchableOpacity
+          style={commonStyles.secondaryButton}
+          onPress={pickImage}
+        >
+          <Text style={commonStyles.secondaryButtonText}>Add Plant Picture</Text>
+        </TouchableOpacity>
 
-  </ScrollView>
-
-);
+        <TouchableOpacity
+          style={commonStyles.primaryButton}
+          onPress={save}
+        >
+          <Text style={commonStyles.buttonText}>Save Plant</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
 }
+
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    padding: 16, 
+  scrollView: {
     backgroundColor: '#d1f8d1ff',
   },
   title: {
@@ -250,8 +279,6 @@ const styles = StyleSheet.create({
     height: 150,
     marginVertical: 12,
     borderRadius: 8,
+    alignSelf: 'center',
   },
-  scrollView: {
-    backgroundColor: '#d1f8d1ff',
-  }
 });
