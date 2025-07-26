@@ -94,9 +94,9 @@ export default function AddEditPlantScreen({ navigation, route }) {
     <SafeAreaView style={commonStyles.container}>
       <StatusBar hidden={false} backgroundColor="white" barStyle="dark-content" />
       
+      {/* Scrollable form section */}
       <View style={commonStyles.scrollSection}>
         <ScrollView 
-          style={styles.scrollView}
           contentContainerStyle={commonStyles.scrollContainer}
           showsVerticalScrollIndicator={false}
         >
@@ -136,15 +136,17 @@ export default function AddEditPlantScreen({ navigation, route }) {
 
           <View style={styles.formGroup}>
             <Text style={styles.label}>Watering Frequency (days):</Text>
-            <Picker 
-              selectedValue={wateringFrequency}
-              onValueChange={(itemValue) => setWateringFrequency(Number(itemValue))}
-              style={styles.picker}
-            >
-              {wateringFrequencyOptions.map((number) => (
-                <Picker.Item key={number} label={`${number}`} value={number} />
-              ))}
-            </Picker>
+            <View style={styles.pickerContainer}>
+              <Picker 
+                selectedValue={wateringFrequency}
+                onValueChange={(itemValue) => setWateringFrequency(Number(itemValue))}
+                style={styles.picker}
+              >
+                {wateringFrequencyOptions.map((number) => (
+                  <Picker.Item key={number} label={`${number}`} value={number} />
+                ))}
+              </Picker>
+            </View>
           </View>
 
           <View style={styles.formGroup}>
@@ -231,9 +233,6 @@ export default function AddEditPlantScreen({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: '#d1f8d1ff',
-  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -255,7 +254,18 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 8,
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: '#eedac9ff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    backgroundColor: '#eedac9ff',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
@@ -263,16 +273,8 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   picker: {
-    borderWidth: 1,
-    padding: 7,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    backgroundColor: 'white',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
+    height: 50,
+    width: '100%',
   },
   image: {
     width: 150,

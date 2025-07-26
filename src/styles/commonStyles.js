@@ -9,19 +9,20 @@ export const commonStyles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
     paddingTop: 16,
+    backgroundColor: '#99c08aff',
   },
   scrollContainer: {
     paddingBottom: 20,
   },
   buttonContainer: {
-    backgroundColor: 'white',
+    backgroundColor: '#eedac9ff',
     paddingHorizontal: 16,
     paddingTop: 10,
     borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
+    borderTopColor: '#005507ff',
   },
   primaryButton: {
-    backgroundColor: '#99c08aff', // light green
+    backgroundColor: '#99c08aff',
     paddingVertical: 12,
     borderRadius: 10,
     alignItems: 'center',
