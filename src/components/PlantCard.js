@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#d97a8d', //'#fffdfc', // soft off-white
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: 'black', //'#d97a8d', //'#eedac9', // blush earth tone
+    borderColor: '#d97a8d', //'#eedac9', // blush earth tone
     elevation: 2,
     shadowColor: '#6b9c4b',
     shadowOffset: { width: 0, height: 2 },
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     borderRadius: 26,
     marginRight: 16,
     borderWidth: 2,
-    borderColor: 'black', //'#d97a8d', // petal pink
+    borderColor: 'white', //'#d97a8d', // petal pink
   },
   info: {
     flex: 1,
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   type: {
     fontSize: 15,
-    color: 'black', //'#6b9c4b', // leaf green for subtle contrast
+    color: 'white', //'#6b9c4b', // leaf green for subtle contrast
     fontWeight: '500',
     marginBottom: 10,
   },

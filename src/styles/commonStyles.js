@@ -34,7 +34,7 @@ export const commonStyles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonText: {
-    color: 'black', //'#ffffff', // white text on colored buttons
+    color: 'white', //'#ffffff', // white text on colored buttons
     fontWeight: 'bold',
     fontSize: 16,
   },
