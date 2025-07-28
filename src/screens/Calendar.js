@@ -296,7 +296,7 @@ const renderCalendar = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f9fa",
+    backgroundColor: "#fffdfc", // match common container
   },
   headerGradient: {
     position: "absolute",
@@ -320,42 +320,43 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOpacity: 0.08,
+    shadowRadius: 3,
+    elevation: 2,
   },
   headerTitle: {
     fontSize: 28,
     fontWeight: "700",
-    color: "white",
+    color: "#8ebf66", // sprout green title
     marginLeft: 15,
+    letterSpacing: 0.5,
   },
   calendarContainer: {
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     borderRadius: 16,
     margin: 20,
     padding: 15,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 2,
+    shadowOpacity: 0.04,
+    shadowRadius: 6,
+    elevation: 1,
   },
   monthHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 15,
+    marginBottom: 12,
   },
   monthText: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#333",
+    color: "#6b9c4b", // leaf green
   },
   weekdayHeader: {
     flexDirection: "row",
@@ -364,12 +365,12 @@ const styles = StyleSheet.create({
   weekdayText: {
     flex: 1,
     textAlign: "center",
-    color: "#666",
+    color: "#a8b4a3", // muted herb gray
     fontWeight: "500",
   },
   calendarWeek: {
     flexDirection: "row",
-    marginBottom: 5,
+    marginBottom: 6,
   },
   calendarDay: {
     flex: 1,
@@ -380,20 +381,20 @@ const styles = StyleSheet.create({
   },
   dayText: {
     fontSize: 16,
-    color: "#333",
+    color: "#34495E",
   },
   today: {
-    backgroundColor: "#1a8e2d15",
+    backgroundColor: "#d97a8d25", // light petal pink background
   },
   todayText: {
-    color: "#1a8e2d",
+    color: "#d97a8d",
     fontWeight: "600",
   },
   selectedDay: {
-    backgroundColor: "#1a8e2d",
+    backgroundColor: "#d97a8d", // petal pink highlight
   },
   selectedDayText: {
-    color: "white",
+    color: "#ffffff",
     fontWeight: "600",
   },
   instructionContainer: {
@@ -402,7 +403,7 @@ const styles = StyleSheet.create({
   },
   instructionText: {
     fontSize: 16,
-    color: "#666",
+    color: "#a8b4a3",
     textAlign: "center",
     fontStyle: "italic",
   },
@@ -412,15 +413,15 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: "50%",
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     padding: 20,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 5,
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    elevation: 3,
   },
   scheduleHeader: {
     flexDirection: "row",
@@ -432,7 +433,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#f7f9f9",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -442,31 +443,32 @@ const styles = StyleSheet.create({
   scheduleTitle: {
     fontSize: 20,
     fontWeight: "700",
-    color: "#333",
+    color: "#6b9c4b", // leaf green for headline
     flex: 1,
   },
   plantBanner: {
-    backgroundColor: '#d1f8d1ff',
-    flexDirection: 'column',
-    alignItems: 'left',
+    backgroundColor: "#d1f8d1", // pastel green
+    flexDirection: "column",
     padding: 12,
     marginTop: 5,
-    marginBottom: 5, 
-    borderRadius: 8,
-    elevation: 2,
-    shadowColor: '#000',
+    marginBottom: 5,
+    borderRadius: 10,
+    elevation: 1,
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+    shadowOpacity: 0.06,
+    shadowRadius: 1.5,
   },
   info: {
     flex: 1,
   },
   name: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+    color: "#2C3E50", // refined deep gray-blue
   },
   type: {
     fontSize: 14,
+    color: "#34495E",
   },
 });

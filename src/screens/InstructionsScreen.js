@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
 
 const markdownStyles = {
   heading1: {
-    color: '#476f4d', // Pine green
+    color: '#d97a8d', // Pine green
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',

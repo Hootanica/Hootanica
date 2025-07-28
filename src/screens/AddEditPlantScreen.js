@@ -234,53 +234,57 @@ export default function AddEditPlantScreen({ navigation, route }) {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
+    fontSize: 28,
+    fontWeight: '700',
+    marginBottom: 24,
     textAlign: 'center',
-    color: '#074407ff',
+    color: '#6b9c4b', // leaf green for continuity
+    letterSpacing: 0.5,
   },
   formGroup: {
-    marginBottom: 12,
+    marginBottom: 18,
   },
   label: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '500',
-    marginBottom: 4,
-    color: '#074407ff',
+    marginBottom: 6,
+    color: '#8ebf66', // sprout green for gentle contrast
+    paddingLeft: 4,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    padding: 10,
-    backgroundColor: '#eedac9ff',
+    borderColor: '#d97a8d', // petal pink border
+    borderRadius: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    backgroundColor: '#ffffff',
+    fontSize: 15,
+    color: '#2D3436', // neutral readable base
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
     elevation: 2,
   },
   pickerContainer: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    backgroundColor: '#eedac9ff',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
+    borderColor: '#d97a8d', // match pink accents
+    borderRadius: 10,
+    backgroundColor: '#ffffff',
+    marginTop: 4,
   },
   picker: {
     height: 50,
     width: '100%',
+    color: '#2D3436',
   },
   image: {
-    width: 150,
-    height: 150,
-    marginVertical: 12,
-    borderRadius: 8,
+    width: 160,
+    height: 160,
+    marginVertical: 20,
+    borderRadius: 16,
     alignSelf: 'center',
+    borderWidth: 2,
+    borderColor: '#6b9c4b', // leafy framing
   },
 });

@@ -26,33 +26,46 @@ export default function PlantCard({ plant, onPress }) {
 const styles = StyleSheet.create({
   card: {
     flexDirection: 'row',
-    alignItems: 'center',
-    padding: 12,
+    alignItems: 'flex-start',
+    padding: 16,
     marginVertical: 8,
-    backgroundColor: '#eedac9ff', //'#bd9a7a',
-    borderRadius: 8,
+    backgroundColor: '#fffdfc', // soft off-white
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#eedac9', // blush earth tone
     elevation: 2,
-    shadowColor: '#654321', //'#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5, //1.41,
+    shadowColor: '#6b4f3a',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
   },
   image: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 12,
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+    marginRight: 16,
+    borderWidth: 1,
+    borderColor: '#d97a8d', // petal pink
   },
   info: {
     flex: 1,
   },
   name: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'black',
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#2C3E50', // main heading color
+    marginBottom: 4,
   },
   type: {
+    fontSize: 15,
+    color: '#6b9c4b', // leaf green for subtle contrast
+    fontWeight: '500',
+    marginBottom: 10,
+  },
+  meta: {
     fontSize: 14,
-    color: '#1c6113ff',
+    color: '#555555', // soft neutral
+    marginBottom: 6,
+    lineHeight: 20,
   },
 });

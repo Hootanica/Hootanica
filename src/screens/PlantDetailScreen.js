@@ -78,58 +78,59 @@ export default function PlantDetailScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d1f8d1',  // mint green
+    backgroundColor: '#fffdfc', // soft off-white
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
   },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     borderRadius: 16,
     padding: 24,
     width: '100%',
     maxWidth: 400,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 5,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
+    elevation: 3,
   },
   title: {
     fontSize: 26,
-    fontWeight: 'bold',
-    color: '#2f5233',
+    fontWeight: '700',
+    color: '#6b9c4b', // leaf green for headline
     marginBottom: 20,
     textAlign: 'center',
+    letterSpacing: 0.5,
   },
   detail: {
     fontSize: 16,
-    color: '#333',
+    color: '#34495E', // soft gray-blue
     marginBottom: 10,
   },
   detailValue: {
     fontWeight: '600',
-    color: '#555',
+    color: '#2C3E50', // deep contrast tone
   },
   buttonContainer: {
     marginTop: 30,
   },
   buttonPrimary: {
-    backgroundColor: '#a8d5ba', // pastel green
-    padding: 12,
-    borderRadius: 8,
+    backgroundColor: '#d97a8d', // petal pink from commonStyles
+    paddingVertical: 12,
+    borderRadius: 10,
     alignItems: 'center',
     marginBottom: 12,
   },
   buttonSecondary: {
-    backgroundColor: '#f6b7b1', // pastel blush red
-    padding: 12,
-    borderRadius: 8,
+    backgroundColor: '#8ebf66', // sprout green for action contrast
+    paddingVertical: 12,
+    borderRadius: 10,
     alignItems: 'center',
   },
   buttonText: {
-    color: '#333',
-    fontWeight: '600',
+    color: '#ffffff', // consistent with commonStyles button text
+    fontWeight: 'bold',
     fontSize: 16,
   },
 });
