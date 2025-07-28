@@ -3,13 +3,13 @@ import { StyleSheet } from 'react-native';
 export const commonStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fffdfc', // soft off-white
+    backgroundColor: 'white', //'#fffdfc', // soft off-white
   },
   scrollSection: {
     flex: 1,
     paddingHorizontal: 16,
     paddingTop: 16,
-    backgroundColor: '#fffdfc', // pale green-pink mix
+    backgroundColor: 'white', //'#fffdfc', // pale green-pink mix
   },
   scrollContainer: {
     paddingBottom: 20,
@@ -27,7 +27,7 @@ export const commonStyles = StyleSheet.create({
     marginBottom: 10,
   },
   secondaryButton: {
-    backgroundColor: '#8ebf66', // sprout green
+    backgroundColor: '#d97a8d', //'#8ebf66', // sprout green
     paddingVertical: 12,
     borderRadius: 10,
     alignItems: 'center',
