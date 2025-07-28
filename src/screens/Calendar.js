@@ -2,8 +2,8 @@
 // Find the code used here: https://github.com/mendsalbert/medicine-reminder-app/blob/main/app/calendar/index.tsx
 // Find youtube video tutorial I used here: https://www.youtube.com/watch?v=fcpZeYeINDw&t=18612s
 
-import React, { useContext, useState, useCallback } from 'react';
-import { View, FlatList, StyleSheet, Text, TouchableOpacity, ScrollView, Platform } from 'react-native';
+import React, { useContext, useState, useCallback, useRef } from 'react';
+import { View, FlatList, StyleSheet, Text, TouchableOpacity, ScrollView, Platform, Animated } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFocusEffect } from "@react-navigation/native";
@@ -13,9 +13,33 @@ const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export default function CalendarView({ navigation }) {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [showSchedule, setShowSchedule] = useState(false);
+  const slideAnim = useRef(new Animated.Value(500)).current;
 
   const { plants } = useContext(PlantContext);
 
+  const handleDatePress = (date) => {
+    setSelectedDate(date);
+    if (!showSchedule) {
+      setShowSchedule(true);
+      Animated.spring(slideAnim, {
+        toValue: 0,
+        useNativeDriver: true,
+        tension: 100,
+        friction: 8,
+      }).start();
+    }
+  };
+
+  const handleCloseSchedule = () => {
+    setShowSchedule(false);
+    Animated.spring(slideAnim, {
+      toValue: 500,
+      useNativeDriver: true,
+      tension: 100,
+      friction: 8,
+    }).start();
+  };
 
   const getDaysInMonth = (date) => {
     const year = date.getFullYear();
@@ -45,14 +69,23 @@ const renderCalendar = () => {
         day
       );
       const isToday = new Date().toDateString() === date.toDateString();
+      const isSelected = showSchedule && selectedDate.getDate() === day;
 
       week.push(
         <TouchableOpacity
           key={day}
-          style={[styles.calendarDay, isToday && styles.today]}
-          onPress={() => setSelectedDate(date)}
+          style={[
+            styles.calendarDay, 
+            isToday && styles.today,
+            isSelected && styles.selectedDay
+          ]}
+          onPress={() => handleDatePress(date)}
         >
-          <Text style={[styles.dayText, isToday && styles.todayText]}>
+          <Text style={[
+            styles.dayText, 
+            isToday && styles.todayText,
+            isSelected && styles.selectedDayText
+          ]}>
             {day}
           </Text>
         </TouchableOpacity>
@@ -72,6 +105,10 @@ const renderCalendar = () => {
 
   // Push the last incomplete week
   if (week.length > 0) {
+    while (week.length < 7) {
+      week.push(<View key={`empty-end-${week.length}`} style={styles.calendarDay} />);
+    }
+    
     calendar.push(
       <View key="last-week" style={styles.calendarWeek}>
         {week}
@@ -81,7 +118,6 @@ const renderCalendar = () => {
 
   return calendar;
 };
-
 
   // Render plants scheduled for the selected date (example implementation)
   const renderPlantsForDate = () => {
@@ -160,81 +196,100 @@ const renderCalendar = () => {
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Calendar</Text>
         </View>
-    <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.calendarContainer}>
-          <View style={styles.monthHeader}>
-            <TouchableOpacity
-              onPress={() =>
-                setSelectedDate(
-                  new Date(
-                    selectedDate.getFullYear(),
-                    selectedDate.getMonth() - 1,
-                    1
+        
+        <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+          <View style={styles.calendarContainer}>
+            <View style={styles.monthHeader}>
+              <TouchableOpacity
+                onPress={() =>
+                  setSelectedDate(
+                    new Date(
+                      selectedDate.getFullYear(),
+                      selectedDate.getMonth() - 1,
+                      1
+                    )
                   )
-                )
-              }
-            >
-              <Ionicons name="chevron-back" size={24} color="#333" />
-            </TouchableOpacity>
-            <Text style={styles.monthText}>
-              {selectedDate.toLocaleString("default", {
-                month: "long",
-                year: "numeric",
-              })}
-            </Text>
-            <TouchableOpacity
-              onPress={() =>
-                setSelectedDate(
-                  new Date(
-                    selectedDate.getFullYear(),
-                    selectedDate.getMonth() + 1,
-                    1
-                  )
-                )
-              }
-            >
-              <Ionicons name="chevron-forward" size={24} color="#333" />
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.weekdayHeader}>
-            {WEEKDAYS.map((day) => (
-              <Text key={day} style={styles.weekdayText}>
-                {day}
+                }
+              >
+                <Ionicons name="chevron-back" size={24} color="#333" />
+              </TouchableOpacity>
+              <Text style={styles.monthText}>
+                {selectedDate.toLocaleString("default", {
+                  month: "long",
+                  year: "numeric",
+                })}
               </Text>
-            ))}
-          </View>
+              <TouchableOpacity
+                onPress={() =>
+                  setSelectedDate(
+                    new Date(
+                      selectedDate.getFullYear(),
+                      selectedDate.getMonth() + 1,
+                      1
+                    )
+                  )
+                }
+              >
+                <Ionicons name="chevron-forward" size={24} color="#333" />
+              </TouchableOpacity>
+            </View>
 
-          {renderCalendar()}
+            <View style={styles.weekdayHeader}>
+              {WEEKDAYS.map((day) => (
+                <Text key={day} style={styles.weekdayText}>
+                  {day}
+                </Text>
+              ))}
+            </View>
+
+            {renderCalendar()}
+            
+          </View>
           
-        </View>
+          {!showSchedule && (
+            <View style={styles.instructionContainer}>
+              <Text style={styles.instructionText}>
+                Tap on a date to see your plant care schedule
+              </Text>
+            </View>
+          )}
         </ScrollView>
 
-
-        <View style={styles.scheduleContainer}>
-          <Text style={styles.scheduleTitle}>
-            {selectedDate.toLocaleDateString("default", {
-              weekday: "long",
-              month: "long",
-              day: "numeric",
-            })}
-          </Text>
-         
-            <ScrollView showsVerticalScrollIndicator={true}
+        {showSchedule && (
+          <Animated.View 
+            style={[
+              styles.scheduleContainer,
+              {
+                transform: [{ translateY: slideAnim }]
+              }
+            ]}
+          >
+            <View style={styles.scheduleHeader}>
+              <Text style={styles.scheduleTitle}>
+                {selectedDate.toLocaleDateString("default", {
+                  weekday: "long",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </Text>
+              <TouchableOpacity 
+                style={styles.closeButton}
+                onPress={handleCloseSchedule}
+              >
+                <Ionicons name="close" size={24} color="#666" />
+              </TouchableOpacity>
+            </View>
+           
+            <ScrollView 
+              showsVerticalScrollIndicator={true}
               contentContainerStyle={styles.scrollViewContent}
->
-    {renderPlantsForDate()}
-  </ScrollView>
-          
-
-
-        </View>
-
-
+            >
+              {renderPlantsForDate()}
+            </ScrollView>
+          </Animated.View>
+        )}
       </View>
-
     </View>
-
   );
 }
 
@@ -334,26 +389,61 @@ const styles = StyleSheet.create({
     color: "#1a8e2d",
     fontWeight: "600",
   },
+  selectedDay: {
+    backgroundColor: "#1a8e2d",
+  },
+  selectedDayText: {
+    color: "white",
+    fontWeight: "600",
+  },
+  instructionContainer: {
+    padding: 20,
+    alignItems: "center",
+  },
+  instructionText: {
+    fontSize: 16,
+    color: "#666",
+    textAlign: "center",
+    fontStyle: "italic",
+  },
   scheduleContainer: {
-    flex: 1,
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: "50%",
     backgroundColor: "white",
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     padding: 20,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.05,
+    shadowOpacity: 0.1,
     shadowRadius: 8,
-    elevation: 2,
+    elevation: 5,
+  },
+  scheduleHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 15,
+  },
+  closeButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "#f0f0f0",
+    justifyContent: "center",
+    alignItems: "center",
   },
   scrollViewContent: {
-  flexGrow: 1,
-},
+    flexGrow: 1,
+  },
   scheduleTitle: {
     fontSize: 20,
     fontWeight: "700",
     color: "#333",
-    marginBottom: 15,
+    flex: 1,
   },
   plantBanner: {
     backgroundColor: '#d1f8d1ff',

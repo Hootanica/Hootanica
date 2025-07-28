@@ -6,53 +6,62 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PlantContext from '../context/PlantContext';
 import PlantCard from '../components/PlantCard';
+import { commonStyles } from '../styles/commonStyles';
 
 export default function HomeScreen({ navigation }) {
   const { plants } = useContext(PlantContext);
+  const insets = useSafeAreaInsets();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={plants}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <PlantCard
-            plant={item}
-            onPress={() => navigation.navigate('PlantDetail', { id: item.id })}
-          />
-        )}
-        contentContainerStyle={[
-          styles.listContainer,
-          plants.length === 0 && styles.emptyContainer,
-        ]}
-        ListEmptyComponent={
-          <Text style={styles.emptyText}>No plants yet. Add your first one!</Text>
-        }
-      />
+    <SafeAreaView style={commonStyles.container}>
+      <StatusBar hidden={false} backgroundColor="white" barStyle="dark-content" />
+      
+      <View style={commonStyles.scrollSection}>
+        <FlatList
+          data={plants}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <PlantCard
+              plant={item}
+              onPress={() => navigation.navigate('PlantDetail', { id: item.id })}
+            />
+          )}
+          contentContainerStyle={[
+            commonStyles.scrollContainer,
+            plants.length === 0 && styles.emptyContainer,
+          ]}
+          ListEmptyComponent={
+            <Text style={styles.emptyText}>No plants yet. Add your first one!</Text>
+          }
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
 
-      <View style={styles.buttonContainer}>
+      <View style={[commonStyles.buttonContainer, { paddingBottom: insets.bottom }]}>
         <TouchableOpacity
-          style={styles.customButton}
+          style={commonStyles.primaryButton}
           onPress={() => navigation.navigate('AddEditPlant')}
         >
-          <Text style={styles.buttonText}>Add Plant</Text>
+          <Text style={commonStyles.buttonText}>Add Plant</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.customButton}
+          style={commonStyles.primaryButton}
           onPress={() => navigation.navigate('Instructions')}
         >
-          <Text style={styles.buttonText}>User Help</Text>
+          <Text style={commonStyles.buttonText}>User Help</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.customButton}
+          style={commonStyles.primaryButton}
           onPress={() => navigation.navigate('Calendar')}
         >
-          <Text style={styles.buttonText}>Calendar</Text>
+          <Text style={commonStyles.buttonText}>Calendar</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -60,33 +69,6 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: 'white',
-  },
-  listContainer: {
-    paddingHorizontal: 16,
-    paddingBottom: 80,
-  },
-  buttonContainer: {
-    position: 'absolute',
-    bottom: 16,
-    left: 16,
-    right: 16,
-  },
-  customButton: {
-    backgroundColor: '#99c08aff', // light green
-    paddingVertical: 12,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  buttonText: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
   emptyContainer: {
     flex: 1,
     padding: 16,

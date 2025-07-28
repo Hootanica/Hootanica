@@ -14,7 +14,13 @@ export default function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Hootanica"> 
-        <Stack.Screen name="Hootanica" component={StartingAnimationScreen} />
+        <Stack.Screen 
+          name="Hootanica" 
+          component={StartingAnimationScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen name="Home" component={HomeScreen}/>
         <Stack.Screen name="AddEditPlant" component={AddEditPlantScreen} />
         <Stack.Screen name="PlantDetail" component={PlantDetailScreen} />

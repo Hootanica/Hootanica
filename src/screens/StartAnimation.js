@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { View, Image, StyleSheet, StatusBar, Dimensions, Animated } from 'react-native';
 
 const flowerFrames = [
   require('../../assets/Hootanica1.png'),
@@ -11,34 +11,60 @@ const flowerFrames = [
 
 export default function StartingAnimationScreen({ navigation }) {
   const [currentFrame, setCurrentFrame] = useState(0);
+  const { width, height } = Dimensions.get('window');
+  const imageSize = Math.min(width, height) * 0.8;
+  const animatedValues = useRef(
+    flowerFrames.map((_, index) => new Animated.Value(index === 0 ? 1 : 0))
+  ).current;
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentFrame((prev) => {
-        if (prev < flowerFrames.length - 1) {
-          return prev + 1;
+        const nextFrame = prev + 1;
+        
+        if (nextFrame < flowerFrames.length) {
+          Animated.timing(animatedValues[nextFrame], {
+            toValue: 1,
+            duration: 200,
+            useNativeDriver: true,
+          }).start();
+          
+          return nextFrame;
         } else {
           clearInterval(interval);
           
-          // navigate to next screen after animation ends
           setTimeout(() => {
             navigation.replace('Home');
-          }, 1000);
+          }, 500);
           return prev;
         }
       });
-    }, 1000); // frame change every 500ms
+    }, 800);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <View style={styles.container}>
-      <Image
-        source={flowerFrames[currentFrame]}
-        style={styles.image}
-        resizeMode="contain"
-      />
+      <StatusBar hidden={true} />
+      <View style={styles.imageContainer}>
+        {flowerFrames.map((frame, index) => (
+          <Animated.Image
+            key={index}
+            source={frame}
+            style={[
+              styles.image,
+              {
+                width: imageSize,
+                height: imageSize,
+                opacity: animatedValues[index],
+                position: 'absolute',
+              }
+            ]}
+            resizeMode="contain"
+          />
+        ))}
+      </View>
     </View>
   );
 }
@@ -50,8 +76,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  image: {
-    width: 700,
-    height: 700,
+  imageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
