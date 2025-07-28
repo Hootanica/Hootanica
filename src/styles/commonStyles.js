@@ -20,7 +20,7 @@ export const commonStyles = StyleSheet.create({
     paddingTop: 10,
   },
   primaryButton: {
-    backgroundColor: '#d97a8d', // petal pink
+    backgroundColor: '#8ebf66', //'#d97a8d', // petal pink
     paddingVertical: 12,
     borderRadius: 10,
     alignItems: 'center',
@@ -34,7 +34,7 @@ export const commonStyles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonText: {
-    color: '#ffffff', // white text on colored buttons
+    color: 'black', //'#ffffff', // white text on colored buttons
     fontWeight: 'bold',
     fontSize: 16,
   },

@@ -29,12 +29,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     padding: 16,
     marginVertical: 8,
-    backgroundColor: '#fffdfc', // soft off-white
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#eedac9', // blush earth tone
+    backgroundColor: '#d97a8d', //'#fffdfc', // soft off-white
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: 'black', //'#d97a8d', //'#eedac9', // blush earth tone
     elevation: 2,
-    shadowColor: '#6b4f3a',
+    shadowColor: '#6b9c4b',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
     height: 52,
     borderRadius: 26,
     marginRight: 16,
-    borderWidth: 1,
-    borderColor: '#d97a8d', // petal pink
+    borderWidth: 2,
+    borderColor: 'black', //'#d97a8d', // petal pink
   },
   info: {
     flex: 1,
@@ -53,18 +53,18 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 17,
     fontWeight: '700',
-    color: '#2C3E50', // main heading color
+    color: 'white', //'#2C3E50', // main heading color
     marginBottom: 4,
   },
   type: {
     fontSize: 15,
-    color: '#6b9c4b', // leaf green for subtle contrast
+    color: 'black', //'#6b9c4b', // leaf green for subtle contrast
     fontWeight: '500',
     marginBottom: 10,
   },
   meta: {
     fontSize: 14,
-    color: '#555555', // soft neutral
+    color: 'white', //'#555555', // soft neutral
     marginBottom: 6,
     lineHeight: 20,
   },
