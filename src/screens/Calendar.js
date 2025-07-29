@@ -8,6 +8,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFocusEffect } from "@react-navigation/native";
 import PlantContext from '../context/PlantContext';
+import NavBar from '../components/NavBar';
+
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -187,15 +189,7 @@ const renderCalendar = () => {
       />
 
       <View style={styles.content}>
-        <View style={styles.header}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => navigation.goBack()}
-          >
-            <Ionicons name="chevron-back" size={28} color="#1a8e2d" />
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Calendar</Text>
-        </View>
+        
         
         <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
           <View style={styles.calendarContainer}>
@@ -289,7 +283,9 @@ const renderCalendar = () => {
           </Animated.View>
         )}
       </View>
+      <NavBar navigation={navigation}/>
     </View>
+    
   );
 }
 

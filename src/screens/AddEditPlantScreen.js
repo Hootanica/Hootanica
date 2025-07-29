@@ -15,6 +15,7 @@ import * as ImagePicker from 'expo-image-picker';
 import PlantContext from '../context/PlantContext';
 import { Picker } from '@react-native-picker/picker';
 import { commonStyles } from '../styles/commonStyles';
+import NavBar from '../components/NavBar';
 
 const wateringFrequencyOptions = [];
 
@@ -228,7 +229,10 @@ export default function AddEditPlantScreen({ navigation, route }) {
           <Text style={commonStyles.buttonText}>Save Plant</Text>
         </TouchableOpacity>
       </View>
+    <NavBar navigation={navigation}/>
     </SafeAreaView>
+
+
   );
 }
 

@@ -1,76 +1,66 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import Markdown from 'react-native-markdown-display';
+import NavBar from '../components/NavBar';
+import { commonStyles } from '../styles/commonStyles';
 
-const header = `# Welcome to Hootanica!`;
+export default function InstructionsScreen({ navigation }) {
+  const header = `# Welcome to Hootanica!`;
 
-const instructions = `
-Add a plant with its name, type, and photo.
-Click the "Add Plant" button. 
-Fill out the fields with the required information.
+  const instructions = `
+- **Add a plant** with its name, type, and photo.  
+  Click the "Add Plant" button and fill out the fields with the required information.
 
-Edit or delete existing plants.
-Click on the desired plant in the Home Page. 
-Click "Edit Plant" or "Delete Plant" as desired.
+- **Edit or delete existing plants.**  
+  Click on the desired plant in the Home Page and then choose "Edit Plant" or "Delete Plant".
 
-View plant details and care logs.
+- **View plant details and care logs.**
 
-View plant care schedules in a calendar.
-Click the "Calendar" button to access the calendar.
-Click on any day in the calendar to view the schedule for that day.
+- **View plant care schedules in a calendar.**  
+  Tap the "Calendar" button, then click any day to view that day's care schedule.
 
-Receive notifications for watering and fertilizing.
+- **Receive notifications for watering and fertilizing.**
 `;
 
-export default function InstructionsScreen() {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {/* Decorative Leaf Ovals - Top Left */}
-      <View style={[styles.oval, styles.oval1]} />
-      <View style={[styles.oval, styles.oval2]} />
-      <View style={[styles.oval, styles.oval3]} />
+    <View style={commonStyles.container}>
+      {/* Decorative Leaf Ovals */}
+      <View style={styles.decorations}>
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(i => (
+          <View key={i} style={[styles.oval, styles[`oval${i}`]]} />
+        ))}
+      </View>
 
-      {/* Decorative Leaf Ovals - Top Right */}
-      <View style={[styles.oval, styles.oval4]} />
-      <View style={[styles.oval, styles.oval5]} />
-      <View style={[styles.oval, styles.oval6]} />
-      <View style={[styles.oval, styles.oval7]} />
+      {/* Scrollable content */}
+      <ScrollView contentContainerStyle={[commonStyles.scrollContainer, styles.scrollContent]}>
+        <Markdown style={markdownStyles}>{header}</Markdown>
+        <View style={{ height: 20 }} />
+        <Markdown style={markdownStyles}>{instructions}</Markdown>
+      </ScrollView>
 
-      <View style={[styles.oval, styles.oval8]} />
-      <View style={[styles.oval, styles.oval9]} />
-      <View style={[styles.oval, styles.oval10]} />
-
-      {/* Header */}
-      <Markdown style={markdownStyles}>{header}</Markdown>
-
-      {/* Spacing between header and bullet points */}
-      <View style={{ height: 20 }} />
-
-      {/* Instructions */}
-      <Markdown style={markdownStyles}>{instructions}</Markdown>
-    </ScrollView>
+      {/* NavBar fixed at bottom */}
+      <NavBar navigation={navigation} />
+    </View>
   );
 }
-
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#FFFFFF',
-    padding: 16,
-    flexGrow: 1,
-    alignItems: 'center',
-    position: 'relative',
+  scrollContent: {
+    paddingHorizontal: 16,
+    paddingTop: 100, // leave space for ovals
+    paddingBottom: 100, // room for NavBar
   },
-
+  decorations: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: -1,
+  },
   oval: {
     position: 'absolute',
-    backgroundColor: '#bee5b0', // Light green
+    backgroundColor: '#bee5b0',
     width: 30,
     height: 17,
     borderRadius: 10,
     opacity: 0.8,
   },
-
-  // Leaf Ovals
   oval1: { top: 10, left: 45, transform: [{ rotate: '53deg' }] },
   oval2: { top: 35, left: 10, transform: [{ rotate: '-70deg' }] },
   oval3: { top: 50, left: 90, transform: [{ rotate: '75deg' }] },
@@ -82,22 +72,25 @@ const styles = StyleSheet.create({
   oval9: { top: 10, right: 115, transform: [{ rotate: '-70deg' }] },
   oval10: { top: 45, right: 30, transform: [{ rotate: '-53deg' }] },
 });
-
 const markdownStyles = {
   heading1: {
-    color: '#d97a8d', // Pine green
+    color: '#d97a8d', // petal pink
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 80,
+    marginBottom: 16,
+  },
+  body: {
+    fontSize: 18,
+    color: '#000000',
+    lineHeight: 28,
   },
   bullet_list: {
-    fontSize: 18,
-    lineHeight: 28,
-    color: '#000000',
+    marginLeft: 16,
   },
   list_item: {
-    color: '#000000',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
   },
   bullet: {
     color: '#000000',

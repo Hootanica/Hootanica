@@ -12,6 +12,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PlantContext from '../context/PlantContext';
 import PlantCard from '../components/PlantCard';
 import { commonStyles } from '../styles/commonStyles';
+import NavBar from '../components/NavBar';
+
 
 export default function HomeScreen({ navigation }) {
   const { plants } = useContext(PlantContext);
@@ -64,6 +66,7 @@ export default function HomeScreen({ navigation }) {
           <Text style={commonStyles.buttonText}>Calendar</Text>
         </TouchableOpacity>
       </View>
+      <NavBar navigation={navigation}/>
     </SafeAreaView>
   );
 }

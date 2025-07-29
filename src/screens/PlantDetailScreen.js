@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform } from 'react-native';
 import PlantContext from '../context/PlantContext';
+import NavBar from '../components/NavBar';
+
 
 export default function PlantDetailScreen({ route, navigation }) {
   const { plants, deletePlant } = useContext(PlantContext);
@@ -71,6 +73,7 @@ export default function PlantDetailScreen({ route, navigation }) {
           </TouchableOpacity>
         </View>
       </View>
+      <NavBar navigation={navigation}/>
     </View>
   );
 }
