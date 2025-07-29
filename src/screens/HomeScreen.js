@@ -52,19 +52,9 @@ export default function HomeScreen({ navigation }) {
           <Text style={commonStyles.buttonText}>Add Plant</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={commonStyles.primaryButton}
-          onPress={() => navigation.navigate('Instructions')}
-        >
-          <Text style={commonStyles.buttonText}>User Help</Text>
-        </TouchableOpacity>
+        
 
-        <TouchableOpacity
-          style={commonStyles.primaryButton}
-          onPress={() => navigation.navigate('Calendar')}
-        >
-          <Text style={commonStyles.buttonText}>Calendar</Text>
-        </TouchableOpacity>
+        
       </View>
       <NavBar navigation={navigation}/>
     </SafeAreaView>
