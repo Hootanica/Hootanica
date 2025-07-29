@@ -182,7 +182,7 @@ const renderCalendar = () => {
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={["#1a8e2d", "#146922"]} // #1a8e2d
+        colors={["#d97a8d", "#6b9c4b"]} // #1a8e2d
         style={styles.headerGradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
@@ -443,12 +443,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   plantBanner: {
-    backgroundColor: "#d1f8d1", // pastel green
+    backgroundColor: 'white', //"#d1f8d1", // pastel green
     flexDirection: "column",
     padding: 12,
     marginTop: 5,
     marginBottom: 5,
     borderRadius: 10,
+    borderWidth: 1.5,
+    borderColor: '#d97a8b',
     elevation: 1,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },

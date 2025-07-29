@@ -8,18 +8,18 @@ export default function InstructionsScreen({ navigation }) {
   const header = `# Welcome to Hootanica!`;
 
   const instructions = `
-- **Add a plant** with its name, type, and photo.  
+**Add a plant** with its name, type, and photo.  
   Click the "Add Plant" button and fill out the fields with the required information.
 
-- **Edit or delete existing plants.**  
+**Edit or delete existing plants.**  
   Click on the desired plant in the Home Page and then choose "Edit Plant" or "Delete Plant".
 
-- **View plant details and care logs.**
+**View plant details and care logs.**
 
-- **View plant care schedules in a calendar.**  
+**View plant care schedules in a calendar.**  
   Tap the "Calendar" button, then click any day to view that day's care schedule.
 
-- **Receive notifications for watering and fertilizing.**
+**Receive notifications for watering and fertilizing.**
 `;
 
   return (
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
 });
 const markdownStyles = {
   heading1: {
-    color: '#d97a8d', // petal pink
+    color: '#6b9c4b',
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
