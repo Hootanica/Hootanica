@@ -81,7 +81,7 @@ export default function PlantDetailScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fffdfc', // soft off-white
+    backgroundColor: 'white', //'#fffdfc', // soft off-white
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
@@ -89,6 +89,8 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#ffffff',
     borderRadius: 16,
+    borderWidth: 2,
+    borderColor: '#d97a8d',
     padding: 24,
     width: '100%',
     maxWidth: 400,
