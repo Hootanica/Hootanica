@@ -13,7 +13,9 @@ const Stack = createStackNavigator();
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Hootanica"> 
+      <Stack.Navigator initialRouteName="Hootanica" screenOptions={{
+    headerShown: false,
+  }}> 
         <Stack.Screen 
           name="Hootanica" 
           component={StartingAnimationScreen}
