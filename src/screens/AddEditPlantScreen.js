@@ -248,12 +248,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '500',
     marginBottom: 6,
-    color: '#8ebf66', // sprout green for gentle contrast
+    color: '#d97a8d', //'#8ebf66', // sprout green for gentle contrast
     paddingLeft: 4,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#d97a8d', // petal pink border
+    borderColor: 'gray', //'#d97a8d', // petal pink border
     borderRadius: 10,
     paddingVertical: 12,
     paddingHorizontal: 16,
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
   },
   pickerContainer: {
     borderWidth: 1,
-    borderColor: '#d97a8d', // match pink accents
+    borderColor: 'gray', //'#d97a8d', // match pink accents
     borderRadius: 10,
     backgroundColor: '#ffffff',
     marginTop: 4,
