@@ -16,6 +16,7 @@ import PlantContext from '../context/PlantContext';
 import { Picker } from '@react-native-picker/picker';
 import { commonStyles } from '../styles/commonStyles';
 import NavBar from '../components/NavBar';
+import { Ionicons } from '@expo/vector-icons';
 
 const wateringFrequencyOptions = [];
 
@@ -70,6 +71,10 @@ export default function AddEditPlantScreen({ navigation, route }) {
     if (!result.canceled) {
       setPhoto(result.assets[0].uri);
     }
+  };
+
+  const deleteImage = () => {
+    setPhoto(null);
   };
 
   const validateForm = () => {
@@ -257,7 +262,17 @@ export default function AddEditPlantScreen({ navigation, route }) {
             />
           </View>
 
-          {photo && <Image source={{ uri: photo }} style={styles.image} />}
+          {photo && (
+            <View style={styles.imageContainer}>
+              <Image source={{ uri: photo }} style={styles.image} />
+              <TouchableOpacity 
+                style={styles.deleteImageButton} 
+                onPress={deleteImage}
+              >
+                <Ionicons name="close" size={20} color="#ffffff" />
+              </TouchableOpacity>
+            </View>
+          )}
         </ScrollView>
       </View>
 
@@ -343,13 +358,32 @@ const styles = StyleSheet.create({
     width: '100%',
     color: '#2D3436',
   },
+  imageContainer: {
+    position: 'relative',
+    alignSelf: 'center',
+    marginVertical: 20,
+  },
   image: {
     width: 160,
     height: 160,
-    marginVertical: 20,
     borderRadius: 16,
-    alignSelf: 'center',
     borderWidth: 2,
     borderColor: '#6b9c4b', // leafy framing
+  },
+  deleteImageButton: {
+    position: 'absolute',
+    top: -8,
+    right: -8,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: '#e74c3c',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3,
   },
 });
