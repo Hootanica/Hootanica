@@ -1,10 +1,24 @@
 import React, { useContext, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform, ScrollView, SafeAreaView } from 'react-native';
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  TouchableOpacity, 
+  Alert, 
+  Platform, 
+  ScrollView, 
+  SafeAreaView, 
+  StatusBar,
+  Image 
+} from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import * as NavigationBar from 'expo-navigation-bar';
 import PlantContext from '../context/PlantContext';
 import NavBar from '../components/NavBar';
 
 export default function PlantDetailScreen({ route, navigation }) {
   const { plants, deletePlant } = useContext(PlantContext);
+  const insets = useSafeAreaInsets();
   const plant = plants.find(p => p.id === route.params.id);
 
   useEffect(() => {
@@ -16,6 +30,22 @@ export default function PlantDetailScreen({ route, navigation }) {
       }
     }
   }, [plant]);
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      NavigationBar.setVisibilityAsync('hidden');
+    }
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      if (Platform.OS === 'android') {
+        NavigationBar.setVisibilityAsync('hidden');
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   const handleDelete = () => {
     const doDelete = () => {
@@ -44,18 +74,52 @@ export default function PlantDetailScreen({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.screen}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <StatusBar 
+        hidden={false} 
+        backgroundColor="white" 
+        barStyle="dark-content"
+        translucent={Platform.OS === 'android'}
+      />
+      
+      <ScrollView 
+        contentContainerStyle={[
+          styles.scrollContainer,
+          { paddingTop: Platform.OS === 'android' ? insets.top + 20 : 20 }
+        ]}
+      >
         <View style={styles.card}>
+          {/* Plant image or emoji display */}
+          {plant.photo ? (
+            <Image source={{ uri: plant.photo }} style={styles.plantImage} />
+          ) : plant.plantEmoji ? (
+            <View style={styles.emojiContainer}>
+              <Text style={styles.plantEmoji}>{plant.plantEmoji}</Text>
+            </View>
+          ) : null}
+
           <Text style={styles.title}>{plant.name}</Text>
           <Text style={styles.detail}>Type: <Text style={styles.detailValue}>{plant.type}</Text></Text>
           <Text style={styles.detail}>Date Created: <Text style={styles.detailValue}>{plant.dateCreated}</Text></Text>
           <Text style={styles.detail}>Water every <Text style={styles.detailValue}>{plant.wateringFrequency} days</Text></Text>
-          <Text style={styles.detail}>Fertilizer Requirements: <Text style={styles.detailValue}>{plant.fertReq}</Text></Text>
-          <Text style={styles.detail}>Soil Requirements: <Text style={styles.detailValue}>{plant.soilReq}</Text></Text>
-          <Text style={styles.detail}>Sunlight Requirements: <Text style={styles.detailValue}>{plant.sunReq}</Text></Text>
-          <Text style={styles.detail}>Disease History: <Text style={styles.detailValue}>{plant.disHist}</Text></Text>
-          <Text style={styles.detail}>Possible Diseases: <Text style={styles.detailValue}>{plant.disease}</Text></Text>
-          <Text style={styles.detail}>Disease Treatments: <Text style={styles.detailValue}>{plant.treatment}</Text></Text>
+          
+          {plant.fertReq && (
+            <Text style={styles.detail}>Fertilizer Requirements: <Text style={styles.detailValue}>{plant.fertReq}</Text></Text>
+          )}
+          {plant.soilReq && (
+            <Text style={styles.detail}>Soil Requirements: <Text style={styles.detailValue}>{plant.soilReq}</Text></Text>
+          )}
+          {plant.sunReq && (
+            <Text style={styles.detail}>Sunlight Requirements: <Text style={styles.detailValue}>{plant.sunReq}</Text></Text>
+          )}
+          {plant.disHist && (
+            <Text style={styles.detail}>Disease History: <Text style={styles.detailValue}>{plant.disHist}</Text></Text>
+          )}
+          {plant.disease && (
+            <Text style={styles.detail}>Possible Diseases: <Text style={styles.detailValue}>{plant.disease}</Text></Text>
+          )}
+          {plant.treatment && (
+            <Text style={styles.detail}>Disease Treatments: <Text style={styles.detailValue}>{plant.treatment}</Text></Text>
+          )}
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity
@@ -104,6 +168,31 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.06,
     shadowRadius: 6,
     elevation: 3,
+  },
+  plantImage: {
+    width: 120,
+    height: 120,
+    borderRadius: 16,
+    alignSelf: 'center',
+    marginBottom: 16,
+    borderWidth: 2,
+    borderColor: '#6b9c4b',
+  },
+  emojiContainer: {
+    alignSelf: 'center',
+    marginBottom: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 120,
+    height: 120,
+    borderRadius: 16,
+    borderWidth: 2,
+    borderColor: '#6b9c4b',
+    borderStyle: 'dashed',
+    backgroundColor: '#f8fff4',
+  },
+  plantEmoji: {
+    fontSize: 60,
   },
   title: {
     fontSize: 26,

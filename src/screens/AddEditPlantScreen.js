@@ -211,8 +211,16 @@ export default function AddEditPlantScreen({ navigation, route }) {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={commonStyles.container}>
-      <StatusBar hidden={false} backgroundColor="white" barStyle="dark-content" />
+    <SafeAreaView style={[
+      commonStyles.container,
+      Platform.OS === 'android' && { paddingTop: 0 }
+    ]}>
+      <StatusBar 
+        hidden={false} 
+        backgroundColor="white" 
+        barStyle="dark-content"
+        translucent={Platform.OS === 'android'}
+      />
       
       {/* Emoji Picker Modal */}
       <Modal
@@ -259,7 +267,10 @@ export default function AddEditPlantScreen({ navigation, route }) {
       </Modal>
       
       {/* Scrollable form section */}
-      <View style={commonStyles.scrollSection}>
+      <View style={[
+        commonStyles.scrollSection,
+        { paddingTop: Platform.OS === 'android' ? insets.top + 16 : 16 }
+      ]}>
         <ScrollView 
           contentContainerStyle={commonStyles.scrollContainer}
           showsVerticalScrollIndicator={false}

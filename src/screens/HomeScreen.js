@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   StatusBar,
+  Platform,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PlantContext from '../context/PlantContext';
@@ -21,9 +22,17 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={commonStyles.container}>
-      <StatusBar hidden={false} backgroundColor="white" barStyle="dark-content" />
+      <StatusBar 
+        hidden={false} 
+        backgroundColor="white" 
+        barStyle="dark-content"
+        translucent={Platform.OS === 'android'}
+      />
       
-      <View style={commonStyles.scrollSection}>
+      <View style={[
+        commonStyles.scrollSection,
+        { paddingTop: Platform.OS === 'android' ? insets.top + 16 : 16 }
+      ]}>
         <FlatList
           data={plants}
           keyExtractor={(item) => item.id.toString()}
@@ -51,10 +60,6 @@ export default function HomeScreen({ navigation }) {
         >
           <Text style={commonStyles.buttonText}>Add Plant</Text>
         </TouchableOpacity>
-
-        
-
-        
       </View>
       <NavBar navigation={navigation}/>
     </SafeAreaView>
@@ -70,7 +75,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 32,
-    color: '#d97a8d', //'#6b9c4b',
+    color: '#d97a8d',
     textAlign: 'center',
   },
 });
