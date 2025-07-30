@@ -11,8 +11,10 @@ import {
   StatusBar,
   Modal,
   FlatList,
-  Animated
+  Animated,
+  Platform
 } from 'react-native';
+import * as NavigationBar from 'expo-navigation-bar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as ImagePicker from 'expo-image-picker';
 import PlantContext from '../context/PlantContext';
@@ -191,6 +193,23 @@ export default function AddEditPlantScreen({ navigation, route }) {
       <Text style={styles.emojiItemText}>{item}</Text>
     </TouchableOpacity>
   );
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      NavigationBar.setVisibilityAsync('hidden');
+      NavigationBar.setBehaviorAsync('overlay-swipe');
+    }
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      if (Platform.OS === 'android') {
+        NavigationBar.setVisibilityAsync('hidden');
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <SafeAreaView style={commonStyles.container}>

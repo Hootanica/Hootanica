@@ -14,8 +14,8 @@ export default function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Hootanica" screenOptions={{
-    headerShown: false,
-  }}> 
+        headerShown: false,
+      }}> 
         <Stack.Screen 
           name="Hootanica" 
           component={StartingAnimationScreen}
