@@ -8,7 +8,10 @@ import {
   ScrollView, 
   SafeAreaView, 
   TouchableOpacity,
-  StatusBar
+  StatusBar,
+  Modal,
+  FlatList,
+  Animated
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as ImagePicker from 'expo-image-picker';
@@ -23,6 +26,8 @@ const wateringFrequencyOptions = [];
 for (let i = 1; i <= 30; i++){
   wateringFrequencyOptions.push(i)
 }
+
+const plantEmojis = ['🌱', '🌿', '🌵', '🌺', '🌻', '🌹', '🌷', '🌸', '🌼', '☘️', '🍀'];
 
 export default function AddEditPlantScreen({ navigation, route }) {
   const { addPlant, editPlant, plants } = useContext(PlantContext);
@@ -40,6 +45,10 @@ export default function AddEditPlantScreen({ navigation, route }) {
   const [disease, setDisease] = useState('');
   const [treatment, setTreatment] = useState('');
   const [errors, setErrors] = useState({});
+  const [plantEmoji, setPlantEmoji] = useState('🌱');
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const slideAnim = useState(new Animated.Value(300))[0];
+  const fadeAnim = useState(new Animated.Value(0))[0];
 
   const editingId = route.params?.id;
 
@@ -58,6 +67,7 @@ export default function AddEditPlantScreen({ navigation, route }) {
         setDisHist(plant.disHist);
         setDisease(plant.disease);
         setTreatment(plant.treatment);
+        setPlantEmoji(plant.plantEmoji || '🌱');
       }
     }
   }, [editingId]);
@@ -75,6 +85,44 @@ export default function AddEditPlantScreen({ navigation, route }) {
 
   const deleteImage = () => {
     setPhoto(null);
+  };
+
+  const openEmojiPicker = () => {
+    setShowEmojiPicker(true);
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
+
+  const closeEmojiPicker = () => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 300,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      setShowEmojiPicker(false);
+    });
+  };
+
+  const selectEmoji = (emoji) => {
+    setPlantEmoji(emoji);
+    closeEmojiPicker();
   };
 
   const validateForm = () => {
@@ -128,15 +176,69 @@ export default function AddEditPlantScreen({ navigation, route }) {
       disHist,
       disease,
       treatment,
+      plantEmoji: plantEmoji,
     };
     if (editingId) editPlant(plant);
     else addPlant(plant);
     navigation.goBack();
   };
 
+  const renderEmojiItem = ({ item }) => (
+    <TouchableOpacity
+      style={styles.emojiItem}
+      onPress={() => selectEmoji(item)}
+    >
+      <Text style={styles.emojiItemText}>{item}</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <SafeAreaView style={commonStyles.container}>
       <StatusBar hidden={false} backgroundColor="white" barStyle="dark-content" />
+      
+      {/* Emoji Picker Modal */}
+      <Modal
+        visible={showEmojiPicker}
+        transparent={true}
+        animationType="none"
+        onRequestClose={closeEmojiPicker}
+      >
+        <Animated.View 
+          style={[
+            styles.modalOverlay,
+            { opacity: fadeAnim }
+          ]}
+        >
+          <TouchableOpacity 
+            style={styles.modalBackdrop}
+            activeOpacity={1}
+            onPress={closeEmojiPicker}
+          />
+          <Animated.View 
+            style={[
+              styles.emojiPickerContainer,
+              { transform: [{ translateY: slideAnim }] }
+            ]}
+          >
+            <View style={styles.emojiPickerHeader}>
+              <Text style={styles.emojiPickerTitle}>Choose Plant Emoji</Text>
+              <TouchableOpacity 
+                onPress={closeEmojiPicker}
+                style={styles.closeButton}
+              >
+                <Ionicons name="close" size={24} color="#666" />
+              </TouchableOpacity>
+            </View>
+            <FlatList
+              data={plantEmojis}
+              renderItem={renderEmojiItem}
+              numColumns={4}
+              keyExtractor={(item, index) => index.toString()}
+              contentContainerStyle={styles.emojiGrid}
+            />
+          </Animated.View>
+        </Animated.View>
+      </Modal>
       
       {/* Scrollable form section */}
       <View style={commonStyles.scrollSection}>
@@ -147,6 +249,29 @@ export default function AddEditPlantScreen({ navigation, route }) {
           <Text style={styles.title}>
             {editingId ? 'Edit Plant' : 'Add Plant'}
           </Text>
+
+          {/* Show emoji placeholder when no photo */}
+          {!photo && (
+            <TouchableOpacity 
+              style={styles.emojiPlaceholder}
+              onPress={openEmojiPicker}
+            >
+              <Text style={styles.emojiText}>{plantEmoji}</Text>
+            </TouchableOpacity>
+          )}
+
+          {/* Show photo with delete button when photo exists */}
+          {photo && (
+            <View style={styles.imageContainer}>
+              <Image source={{ uri: photo }} style={styles.image} />
+              <TouchableOpacity 
+                style={styles.deleteImageButton} 
+                onPress={deleteImage}
+              >
+                <Ionicons name="close" size={20} color="#ffffff" />
+              </TouchableOpacity>
+            </View>
+          )}
 
           <View style={styles.formGroup}>
             <Text style={styles.label}>Name: <Text style={styles.required}>*</Text></Text>
@@ -261,18 +386,6 @@ export default function AddEditPlantScreen({ navigation, route }) {
               style={styles.input} 
             />
           </View>
-
-          {photo && (
-            <View style={styles.imageContainer}>
-              <Image source={{ uri: photo }} style={styles.image} />
-              <TouchableOpacity 
-                style={styles.deleteImageButton} 
-                onPress={deleteImage}
-              >
-                <Ionicons name="close" size={20} color="#ffffff" />
-              </TouchableOpacity>
-            </View>
-          )}
         </ScrollView>
       </View>
 
@@ -293,8 +406,6 @@ export default function AddEditPlantScreen({ navigation, route }) {
       </View>
     <NavBar navigation={navigation}/>
     </SafeAreaView>
-
-
   );
 }
 
@@ -346,17 +457,28 @@ const styles = StyleSheet.create({
     marginTop: 4,
     paddingLeft: 4,
   },
-  pickerContainer: {
-    borderWidth: 1,
-    borderColor: 'gray', //'#d97a8d', // match pink accents
-    borderRadius: 10,
-    backgroundColor: '#ffffff',
-    marginTop: 4,
+  emojiPlaceholder: {
+    alignSelf: 'center',
+    marginVertical: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 160,
+    height: 160,
+    borderRadius: 16,
+    borderWidth: 2,
+    borderColor: '#6b9c4b',
+    borderStyle: 'dashed',
+    backgroundColor: '#f8fff4',
   },
-  picker: {
-    height: 50,
-    width: '100%',
-    color: '#2D3436',
+  emojiText: {
+    fontSize: 60,
+    marginBottom: 8,
+  },
+  emojiLabel: {
+    fontSize: 14,
+    color: '#6b9c4b',
+    fontWeight: '500',
+    textAlign: 'center',
   },
   imageContainer: {
     position: 'relative',
@@ -385,5 +507,57 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
     elevation: 3,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  modalBackdrop: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  emojiPickerContainer: {
+    backgroundColor: 'white',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 20,
+    width: '100%',
+    maxHeight: '70%',
+  },
+  emojiPickerHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  emojiPickerTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#6b9c4b',
+  },
+  closeButton: {
+    padding: 5,
+  },
+  emojiGrid: {
+    alignItems: 'center',
+  },
+  emojiItem: {
+    width: 60,
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 8,
+    borderRadius: 10,
+    backgroundColor: '#f8fff4',
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  emojiItemText: {
+    fontSize: 32,
   },
 });
