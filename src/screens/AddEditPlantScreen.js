@@ -31,13 +31,14 @@ export default function AddEditPlantScreen({ navigation, route }) {
   const [type, setType] = useState('');
   const [photo, setPhoto] = useState(null);
   const [dateCreated, setDateCreated] = useState(new Date().toISOString().split('T')[0]);
-  const [wateringFrequency, setWateringFrequency] = useState(1);
+  const [wateringFrequency, setWateringFrequency] = useState('1');
   const [fertReq, setFertilizerRequirements] = useState('');
   const [soilReq, setSoilRequirements] = useState('');
   const [sunReq, setSunRequirements] = useState('');
   const [disHist, setDisHist] = useState('');
   const [disease, setDisease] = useState('');
   const [treatment, setTreatment] = useState('');
+  const [errors, setErrors] = useState({});
 
   const editingId = route.params?.id;
 
@@ -49,7 +50,7 @@ export default function AddEditPlantScreen({ navigation, route }) {
         setType(plant.type);
         setPhoto(plant.photo);
         setDateCreated(plant.dateCreated);
-        setWateringFrequency(plant.wateringFrequency);
+        setWateringFrequency(plant.wateringFrequency.toString());
         setFertilizerRequirements(plant.fertReq);
         setSoilRequirements(plant.soilReq);
         setSunRequirements(plant.sunReq);
@@ -71,14 +72,51 @@ export default function AddEditPlantScreen({ navigation, route }) {
     }
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+    
+    if (!type.trim()) {
+      newErrors.type = 'Type is required';
+    }
+    
+    if (!dateCreated.trim()) {
+      newErrors.dateCreated = 'Date is required';
+    }
+    
+    const freq = parseInt(wateringFrequency);
+    if (!wateringFrequency.trim() || isNaN(freq) || freq < 1) {
+      newErrors.wateringFrequency = 'Watering frequency must be a number ≥ 1';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleWateringFrequencyChange = (text) => {
+    const numericText = text.replace(/[^0-9]/g, '');
+    setWateringFrequency(numericText);
+    
+    if (errors.wateringFrequency) {
+      setErrors(prev => ({ ...prev, wateringFrequency: null }));
+    }
+  };
+
   const save = () => {
+    if (!validateForm()) {
+      return;
+    }
+    
     const plant = {
       id: editingId || Date.now(),
-      name,
-      type,
+      name: name.trim(),
+      type: type.trim(),
       photo,
-      dateCreated,
-      wateringFrequency,
+      dateCreated: dateCreated.trim(),
+      wateringFrequency: parseInt(wateringFrequency),
       fertReq,
       soilReq,
       sunReq,
@@ -106,48 +144,57 @@ export default function AddEditPlantScreen({ navigation, route }) {
           </Text>
 
           <View style={styles.formGroup}>
-            <Text style={styles.label}>Name:</Text>
+            <Text style={styles.label}>Name: <Text style={styles.required}>*</Text></Text>
             <TextInput 
               placeholder="Enter plant name" 
               value={name} 
-              onChangeText={setName} 
-              style={styles.input} 
+              onChangeText={(text) => {
+                setName(text);
+                if (errors.name) setErrors(prev => ({ ...prev, name: null }));
+              }}
+              style={[styles.input, errors.name && styles.inputError]} 
             />
+            {errors.name && <Text style={styles.errorText}>{errors.name}</Text>}
           </View>
 
           <View style={styles.formGroup}>
-            <Text style={styles.label}>Type:</Text>
+            <Text style={styles.label}>Type: <Text style={styles.required}>*</Text></Text>
             <TextInput 
               placeholder="Enter plant type" 
               value={type} 
-              onChangeText={setType} 
-              style={styles.input} 
+              onChangeText={(text) => {
+                setType(text);
+                if (errors.type) setErrors(prev => ({ ...prev, type: null }));
+              }}
+              style={[styles.input, errors.type && styles.inputError]} 
             />
+            {errors.type && <Text style={styles.errorText}>{errors.type}</Text>}
           </View>
 
           <View style={styles.formGroup}>
-            <Text style={styles.label}>Date Created:</Text>
+            <Text style={styles.label}>Starting Date: <Text style={styles.required}>*</Text></Text>
             <TextInput 
               placeholder="YYYY-MM-DD" 
               value={dateCreated} 
-              onChangeText={setDateCreated} 
-              style={styles.input} 
+              onChangeText={(text) => {
+                setDateCreated(text);
+                if (errors.dateCreated) setErrors(prev => ({ ...prev, dateCreated: null }));
+              }}
+              style={[styles.input, errors.dateCreated && styles.inputError]} 
             />
+            {errors.dateCreated && <Text style={styles.errorText}>{errors.dateCreated}</Text>}
           </View>
 
           <View style={styles.formGroup}>
-            <Text style={styles.label}>Watering Frequency (days):</Text>
-            <View style={styles.pickerContainer}>
-              <Picker 
-                selectedValue={wateringFrequency}
-                onValueChange={(itemValue) => setWateringFrequency(Number(itemValue))}
-                style={styles.picker}
-              >
-                {wateringFrequencyOptions.map((number) => (
-                  <Picker.Item key={number} label={`${number}`} value={number} />
-                ))}
-              </Picker>
-            </View>
+            <Text style={styles.label}>Watering Frequency (days): <Text style={styles.required}>*</Text></Text>
+            <TextInput 
+              placeholder="Enter number of days (1 or greater)" 
+              value={wateringFrequency} 
+              onChangeText={handleWateringFrequencyChange}
+              keyboardType="numeric"
+              style={[styles.input, errors.wateringFrequency && styles.inputError]} 
+            />
+            {errors.wateringFrequency && <Text style={styles.errorText}>{errors.wateringFrequency}</Text>}
           </View>
 
           <View style={styles.formGroup}>
@@ -255,6 +302,10 @@ const styles = StyleSheet.create({
     color: '#d97a8d', //'#8ebf66', // sprout green for gentle contrast
     paddingLeft: 4,
   },
+  required: {
+    color: '#e74c3c',
+    fontWeight: 'bold',
+  },
   input: {
     borderWidth: 1,
     borderColor: 'gray', //'#d97a8d', // petal pink border
@@ -269,6 +320,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.05,
     shadowRadius: 3,
     elevation: 2,
+  },
+  inputError: {
+    borderColor: '#e74c3c',
+    borderWidth: 2,
+  },
+  errorText: {
+    color: '#e74c3c',
+    fontSize: 12,
+    marginTop: 4,
+    paddingLeft: 4,
   },
   pickerContainer: {
     borderWidth: 1,
