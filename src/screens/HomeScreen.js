@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 24,
-    color: '#d97a8d',
+    color: '#E52B50', //'#d97a8d',
     fontWeight: '600',
     marginBottom: 6,
   },
@@ -118,14 +118,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF8F3',
   },
   primaryButton: {
-    backgroundColor: '#d97a8d',
+    backgroundColor: '#FFF8F3', //'#d97a8d',
+    borderWidth: 2,
+    borderColor: '#4A2511',
     paddingVertical: 14,
     paddingHorizontal: 30,
     borderRadius: 30,
     elevation: 2,
   },
   buttonText: {
-    color: '#fff',
+    color: '#028a0f', //'#fff',
     fontWeight: '600',
     fontSize: 16,
   },
