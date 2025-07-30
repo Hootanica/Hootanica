@@ -10,14 +10,16 @@ export default function PlantCard({ plant, onPress }) {
       <View style={styles.info}>
         <Text style={styles.name}>{plant.name}</Text>
         <Text style={styles.type}>{plant.type}</Text>
-        <Text style={styles.meta}>Created: {plant.dateCreated}</Text>
-        <Text style={styles.meta}>Water every {plant.wateringFrequency} days</Text>
-        <Text style={styles.meta}>Fertilizer Requirements: {plant.fertReq}</Text>
-        <Text style={styles.meta}>Soil Requirements: {plant.soilReq}</Text>
-        <Text style={styles.meta}>Sunlight Requirements: {plant.sunReq}</Text>
-        <Text style={styles.meta}>Disease History: {plant.disHist}</Text>
-        <Text style={styles.meta}>Possible Diseases: {plant.disease}</Text>
-        <Text style={styles.meta}>Disease Treatments: {plant.treatment}</Text>
+        <View style={styles.divider} />
+
+        <Text style={styles.meta}><Text style={styles.label}>Created:</Text> {plant.dateCreated}</Text>
+        <Text style={styles.meta}><Text style={styles.label}>Water:</Text> Every {plant.wateringFrequency} days</Text>
+        <Text style={styles.meta}><Text style={styles.label}>Fertilizer:</Text> {plant.fertReq}</Text>
+        <Text style={styles.meta}><Text style={styles.label}>Soil:</Text> {plant.soilReq}</Text>
+        <Text style={styles.meta}><Text style={styles.label}>Sunlight:</Text> {plant.sunReq}</Text>
+        <Text style={styles.meta}><Text style={styles.label}>Disease History:</Text> {plant.disHist}</Text>
+        <Text style={styles.meta}><Text style={styles.label}>Possible Diseases:</Text> {plant.disease}</Text>
+        <Text style={styles.meta}><Text style={styles.label}>Treatments:</Text> {plant.treatment}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -26,46 +28,55 @@ export default function PlantCard({ plant, onPress }) {
 const styles = StyleSheet.create({
   card: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    padding: 16,
-    marginVertical: 8,
-    backgroundColor: '#d97a8d', //'#fffdfc', // soft off-white
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#d97a8d', //'#eedac9', // blush earth tone
-    elevation: 2,
-    shadowColor: '#6b9c4b',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
+    backgroundColor: '#FFF8F3', //'#EBF5F0', // soft warm white
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#4A2511', // pecan
+    overflow: 'hidden',
+    marginVertical: 10,
+    marginHorizontal: 16,
+    elevation: 5,
+    shadowColor: '#A67B5B', // cafe au lait
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
   },
   image: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    marginRight: 16,
-    borderWidth: 2,
-    borderColor: 'white', //'#d97a8d', // petal pink
+    width: 130,
+    height: '100%',
+    borderTopLeftRadius: 16,
+    borderBottomLeftRadius: 16,
   },
   info: {
     flex: 1,
+    padding: 14,
+    justifyContent: 'center',
   },
   name: {
-    fontSize: 17,
-    fontWeight: '700',
-    color: 'white', //'#2C3E50', // main heading color
-    marginBottom: 4,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#2E1503', // dark chocolate
+    marginBottom: 2,
   },
   type: {
-    fontSize: 15,
-    color: 'white', //'#6b9c4b', // leaf green for subtle contrast
-    fontWeight: '500',
-    marginBottom: 10,
+    fontSize: 14,
+    color: '#E52B50', //amaranth pink '#bb5d64', // soft amaranth
+    marginBottom: 8,
+    fontStyle: 'italic',
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#D3B49C', // soft cafe au lait
+    marginVertical: 8,
   },
   meta: {
     fontSize: 14,
-    color: 'white', //'#555555', // soft neutral
-    marginBottom: 6,
+    color: '#4A3728', // cedar brown
+    marginBottom: 5,
     lineHeight: 20,
+  },
+  label: {
+    fontWeight: '600',
+    color: '#2E1503',
   },
 });
