@@ -99,7 +99,7 @@ export default function PlantDetailScreen({ route, navigation }) {
 
           <Text style={styles.title}>{plant.name}</Text>
           <Text style={styles.detail}>Type: <Text style={styles.detailValue}>{plant.type}</Text></Text>
-          <Text style={styles.detail}>Date Created: <Text style={styles.detailValue}>{plant.dateCreated}</Text></Text>
+          <Text style={styles.detail}>Starting Date: <Text style={styles.detailValue}>{plant.dateCreated}</Text></Text>
           <Text style={styles.detail}>Water every <Text style={styles.detailValue}>{plant.wateringFrequency} days</Text></Text>
           
           {plant.fertReq && (
