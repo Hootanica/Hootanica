@@ -7,7 +7,7 @@ export default function NavBar( { navigation }) {
   return (
     <View style={styles.navBar}>
       <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
-        <Icon name="leaf-outline" size={22} color="#6b9c4b" />
+        <Icon name="leaf-outline" size={22} color="#028a0f" />
         <Text style={styles.label}>Plants</Text>
       </TouchableOpacity>
 
@@ -17,7 +17,7 @@ export default function NavBar( { navigation }) {
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Instructions')}>
-        <Icon name="help-circle-outline" size={22} color="#d97a8d" />
+        <Icon name="help-circle-outline" size={22} color="#e52b50" />
         <Text style={styles.label}>Help</Text>
       </TouchableOpacity>
     </View>
@@ -30,10 +30,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingVertical: 12,
     backgroundColor: '#fffdfc',
-    borderTopWidth: 1,
-    borderColor: '#eedac9',
+    borderTopWidth: .3,
+    borderColor: '#4A2511',
     elevation: 3,
-    shadowColor: '#6b4f3a',
+    shadowColor: '#A67B5B', //'#6b4f3a',
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.08,
     shadowRadius: 6,
