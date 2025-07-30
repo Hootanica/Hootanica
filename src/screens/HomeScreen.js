@@ -59,7 +59,7 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white', //'#f1f9ec',
+    backgroundColor: '#f1f9ec',
     flex: 1,
   },
   scrollSection: {
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 32,
-    color: '#d97a8d',
+    color: '#e52b50', //'#d97a8d',
     textAlign: 'center',
   },
 });
