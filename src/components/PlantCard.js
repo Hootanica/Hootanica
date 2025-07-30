@@ -30,15 +30,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff',
     borderRadius: 12,
-    borderWidth: .5,
+    borderWidth: 1,
     borderColor: '#4A2511', // pecan
     overflow: 'hidden',
     marginVertical: 10,
     elevation: 4,
-    //shadowColor: '#A67B5B', // cafe au lait
-    //shadowOffset: { width: 0, height: 2 },
-    //shadowOpacity: 0.2,
-    //shadowRadius: 6,
+    shadowColor: '#A67B5B', // cafe au lait
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
   },
   image: {
     width: 150,
