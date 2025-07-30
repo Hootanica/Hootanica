@@ -140,6 +140,25 @@ export default function AddEditPlantScreen({ navigation, route }) {
     
     if (!dateCreated.trim()) {
       newErrors.dateCreated = 'Date is required';
+    } else {
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+      if (!dateRegex.test(dateCreated)) {
+        newErrors.dateCreated = 'Date must be in YYYY-MM-DD format';
+      } else {
+        // Further validation for valid date
+        const dateParts = dateCreated.split('-');
+        const year = parseInt(dateParts[0]);
+        const month = parseInt(dateParts[1]);
+        const day = parseInt(dateParts[2]);
+        if (month < 1 || month > 12) {
+          newErrors.dateCreated = 'Month must be between 01 and 12';
+        } else {
+          const daysInMonth = new Date(year, month, 0).getDate();
+          if (day < 1 || day > daysInMonth) {
+            newErrors.dateCreated = `Day must be between 01 and ${daysInMonth.toString().padStart(2, '0')} for ${month.toString().padStart(2, '0')}/${year}`;
+          }
+        }
+      }
     }
     
     const freq = parseInt(wateringFrequency);
@@ -149,6 +168,43 @@ export default function AddEditPlantScreen({ navigation, route }) {
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const handleDateCreatedChange = (text) => {
+    let filteredText = text.replace(/[^0-9-]/g, '');
+    filteredText = filteredText.replace(/-+/g, '-');
+    let cleanedText = '';
+    for (let i = 0; i < filteredText.length; i++) {
+      const char = filteredText[i];
+      if (char === '-') {
+        if (i === 4 || i === 7) {
+          cleanedText += char;
+        }
+      } else {
+        cleanedText += char;
+      }
+    }
+    if (cleanedText.length < dateCreated.replace(/[^0-9-]/g, '').length) {
+      setDateCreated(cleanedText);
+      if (errors.dateCreated) {
+        setErrors(prev => ({ ...prev, dateCreated: null }));
+      }
+      return;
+    }
+    let formattedText = cleanedText;
+    if (formattedText.length >= 4 && formattedText.charAt(4) !== '-') {
+      formattedText = formattedText.slice(0, 4) + '-' + formattedText.slice(4);
+    }
+    if (formattedText.length >= 7 && formattedText.charAt(7) !== '-') {
+      formattedText = formattedText.slice(0, 7) + '-' + formattedText.slice(7);
+    }
+    if (formattedText.length > 10) {
+      formattedText = formattedText.slice(0, 10);
+    }
+    setDateCreated(formattedText);
+    if (errors.dateCreated) {
+      setErrors(prev => ({ ...prev, dateCreated: null }));
+    }
   };
 
   const handleWateringFrequencyChange = (text) => {
@@ -335,10 +391,9 @@ export default function AddEditPlantScreen({ navigation, route }) {
             <TextInput 
               placeholder="YYYY-MM-DD" 
               value={dateCreated} 
-              onChangeText={(text) => {
-                setDateCreated(text);
-                if (errors.dateCreated) setErrors(prev => ({ ...prev, dateCreated: null }));
-              }}
+              onChangeText={handleDateCreatedChange}
+              keyboardType="numeric"
+              maxLength={10}
               style={[styles.input, errors.dateCreated && styles.inputError]} 
             />
             {errors.dateCreated && <Text style={styles.errorText}>{errors.dateCreated}</Text>}
