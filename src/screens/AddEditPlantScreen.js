@@ -197,7 +197,6 @@ export default function AddEditPlantScreen({ navigation, route }) {
   useEffect(() => {
     if (Platform.OS === 'android') {
       NavigationBar.setVisibilityAsync('hidden');
-      NavigationBar.setBehaviorAsync('overlay-swipe');
     }
   }, []);
 
