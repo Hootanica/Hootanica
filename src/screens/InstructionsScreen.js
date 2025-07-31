@@ -1,99 +1,80 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View, StatusBar } from 'react-native';
 import Markdown from 'react-native-markdown-display';
 import NavBar from '../components/NavBar';
-import { commonStyles } from '../styles/commonStyles';
 
 export default function InstructionsScreen({ navigation }) {
   const header = `# Welcome to Hootanica!`;
 
   const instructions = `
-**Add a plant** with its name, type, and photo.  
-  Click the "+ Add Plant" button and fill out the fields with the required information.
-  Give your plant a unique name, or keep it the same as its type!
+**🌱 Add a plant** with its name, type, and photo.  
+Click the "+ Add Plant" button and fill out the fields with the required information.  
+Give your plant a unique name, or keep it the same as its type!
 
-**Edit or delete existing plants.**  
-  Click on the desired plant in the Home Page and then choose "Edit Plant" or "Delete Plant".
+**✏️ Edit or delete existing plants.**  
+Tap on a plant on the Home Page, then choose "Edit Plant" or "Delete Plant".
 
-**View plant details and care logs.**
+**🔍 View plant details and care logs.**
 
-**View plant care schedules in a calendar.**  
-  Tap the "Calendar" button, then click any day to view that day's care schedule.
+**📅 View plant care schedules in a calendar.**  
+Tap the "Calendar" button, then tap any day to see that day's care tasks.
 
-**Receive notifications for watering and fertilizing.**
+**🔔 Receive notifications for watering and fertilizing.**
 `;
 
   return (
-    <View style={commonStyles.container}>
-      {/* Decorative Leaf Ovals */}
-      <View style={styles.decorations}>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(i => (
-          <View key={i} style={[styles.oval, styles[`oval${i}`]]} />
-        ))}
-      </View>
+    <View style={styles.container}>
+      <StatusBar backgroundColor="#FFF8F3" barStyle="dark-content" />
 
-      {/* Scrollable content */}
-      <ScrollView contentContainerStyle={[commonStyles.scrollContainer, styles.scrollContent]}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
         <Markdown style={markdownStyles}>{header}</Markdown>
-        <View style={{ height: 20 }} />
         <Markdown style={markdownStyles}>{instructions}</Markdown>
       </ScrollView>
 
-      {/* NavBar fixed at bottom */}
       <NavBar navigation={navigation} />
     </View>
   );
 }
+
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFF8F3',
+  },
   scrollContent: {
-    paddingHorizontal: 16,
-    paddingTop: 100, // leave space for ovals
-    paddingBottom: 100, // room for NavBar
+    paddingTop: 60,
+    paddingBottom: 100,
+    paddingHorizontal: 20,
   },
-  decorations: {
-    ...StyleSheet.absoluteFillObject,
-    zIndex: -1,
-  },
-  oval: {
-    position: 'absolute',
-    backgroundColor: '#bee5b0',
-    width: 30,
-    height: 17,
-    borderRadius: 10,
-    opacity: 0.8,
-  },
-  oval1: { top: 10, left: 45, transform: [{ rotate: '53deg' }] },
-  oval2: { top: 35, left: 10, transform: [{ rotate: '-70deg' }] },
-  oval3: { top: 50, left: 90, transform: [{ rotate: '75deg' }] },
-  oval4: { top: 10, right: 10, transform: [{ rotate: '53deg' }] },
-  oval5: { top: 30, right: 195, transform: [{ rotate: '-70deg' }] },
-  oval6: { top: 50, right: 150, transform: [{ rotate: '75deg' }] },
-  oval7: { top: 30, right: 75, transform: [{ rotate: '53deg' }] },
-  oval8: { top: 25, right: 240, transform: [{ rotate: '53deg' }] },
-  oval9: { top: 10, right: 115, transform: [{ rotate: '-70deg' }] },
-  oval10: { top: 45, right: 30, transform: [{ rotate: '-53deg' }] },
 });
+
 const markdownStyles = {
   heading1: {
-    color: '#6b9c4b',
-    fontSize: 28,
+    color: '#028a0f', // rich green
+    fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 16,
+    marginBottom: 24,
   },
   body: {
     fontSize: 18,
-    color: '#000000',
-    lineHeight: 28,
+    color: '#2E1503',
+    lineHeight: 30,
   },
-  bullet_list: {
-    marginLeft: 16,
+  strong: {
+    color: '#4A2511',
+  },
+  paragraph: {
+    marginBottom: 16,
   },
   list_item: {
     flexDirection: 'row',
     alignItems: 'flex-start',
+    marginBottom: 12,
   },
   bullet: {
-    color: '#000000',
+    fontSize: 20,
+    color: '#2E1503',
+    marginRight: 10,
   },
 };
