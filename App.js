@@ -11,5 +11,3 @@ export default function App() {
     </PlantProvider>
   );
 }
-
-// No local styles needed as navigation handles styling
