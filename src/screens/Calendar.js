@@ -127,56 +127,53 @@ const renderCalendar = () => {
       return <Text style={{ color: '#666' }}>No plants scheduled for this date.</Text>;
     }
     
-    const selectedDayStart = new Date(
-        selectedDate.getFullYear(),
-        selectedDate.getMonth(),
-        selectedDate.getDate()
-    );
-
-    const neededToBeWatered = plants.filter((plant) =>{
-        if (!plant.dateCreated || !plant.wateringFrequency){ return false;}
-
-        const dateCreated = new Date(plant.dateCreated);
-        const d1 = dateCreated.setHours(0,0,0,0);
-        const d2 = selectedDayStart.setHours(0,0,0,0);
-
-        const diffTime = d2 - d1; //note that this calculation is in milliseconds and we want to compare how many DAYS apart they are
-        const dayDifference = Math.floor (diffTime / (1000 * 60 * 60 * 24)); //so here we are converting it to days
-
-        if (dayDifference >= 0 && dayDifference % plant.wateringFrequency === 0){
-            //we are checking to see if the difference of days between date created and current date is greater than 0 (this date is in the future)
-            //and then we are checking to see if it is a multiple of the wateringFrequency
-            return true; 
+    const neededToBeWatered = plants.filter((plant) => {
+        if (!plant.dateCreated || !plant.wateringFrequency) { 
+            return false; 
         }
 
-        else{
+        const dateParts = plant.dateCreated.split('-');
+        const plantYear = parseInt(dateParts[0]);
+        const plantMonth = parseInt(dateParts[1]) - 1;
+        const plantDay = parseInt(dateParts[2]);
+        
+        const plantStartDate = new Date(plantYear, plantMonth, plantDay);
+        const checkDate = new Date(
+            selectedDate.getFullYear(), 
+            selectedDate.getMonth(), 
+            selectedDate.getDate()
+        );
+
+        const diffTime = checkDate.getTime() - plantStartDate.getTime();
+        const dayDifference = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+        if (dayDifference >= 0 && dayDifference % plant.wateringFrequency === 0) {
+            return true; 
+        } else {
             return false;
         }
-    }
-    )
+    });
 
     if (neededToBeWatered.length === 0) {
         return <Text style={{ color: '#666' }}>No plants to water on this date.</Text>;
     }
 
     return neededToBeWatered.map((plant) => (
-
-    <TouchableOpacity
-    key={plant.id}
-    onPress={() => navigation.navigate('PlantDetail', { id: plant.id })}
-  >
-    <View style={styles.plantBanner} key={plant.id} >
-      <Text style={styles.name}>{plant.name}</Text>
-      <Text style={styles.type}>
-        Type: {plant.type}
-      </Text>
-      <Text style={styles.info}>
-        Frequency: every {plant.wateringFrequency} days
-      </Text>
-    </View>
-    </TouchableOpacity>
-  ));
-    
+        <TouchableOpacity
+            key={plant.id}
+            onPress={() => navigation.navigate('PlantDetail', { id: plant.id })}
+        >
+            <View style={styles.plantBanner}>
+                <Text style={styles.name}>{plant.name}</Text>
+                <Text style={styles.type}>
+                    Type: {plant.type}
+                </Text>
+                <Text style={styles.info}>
+                    Frequency: every {plant.wateringFrequency} days
+                </Text>
+            </View>
+        </TouchableOpacity>
+    ));
   };
 
   return (

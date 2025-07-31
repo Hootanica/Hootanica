@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   StatusBar,
+  Platform,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PlantContext from '../context/PlantContext';
@@ -19,7 +20,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar hidden={false} backgroundColor="white" barStyle="dark-content" />
+      <StatusBar hidden={false} backgroundColor="white" barStyle="dark-content" translucent={Platform.OS === 'android'}/>
 
       <View style={styles.header}>
         <Text style={styles.title}>Your Garden</Text>
@@ -102,10 +103,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   emptyText: {
-    fontSize: 24,
-    color: '#E52B50', //'#d97a8d',
-    fontWeight: '600',
-    marginBottom: 6,
+    fontSize: 32,
+    color: '#d97a8d',
   },
   emptySubText: {
     fontSize: 16,

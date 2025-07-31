@@ -2,6 +2,34 @@ import React from 'react';
 import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
 
 export default function PlantCard({ plant, onPress }) {
+  const getNextWateringDate = () => {
+    if (!plant.dateCreated || !plant.wateringFrequency) {
+      return 'N/A';
+    }
+    const dateParts = plant.dateCreated.split('-');
+    const plantYear = parseInt(dateParts[0]);
+    const plantMonth = parseInt(dateParts[1]) - 1;
+    const plantDay = parseInt(dateParts[2]);
+    const plantStartDate = new Date(plantYear, plantMonth, plantDay);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const diffTime = today.getTime() - plantStartDate.getTime();
+    const daysSincePlanting = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (daysSincePlanting >= 0 && daysSincePlanting % plant.wateringFrequency === 0) {
+      return 'Today';
+    }
+    const daysSinceLastWatering = daysSincePlanting % plant.wateringFrequency;
+    const daysUntilNextWatering = plant.wateringFrequency - daysSinceLastWatering;
+    
+    const nextWateringDate = new Date(today);
+    nextWateringDate.setDate(today.getDate() + daysUntilNextWatering);
+    const month = (nextWateringDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = nextWateringDate.getDate().toString().padStart(2, '0');
+    
+    return `${month}/${day}`;
+  };
+
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
       {plant.photo && (
@@ -12,14 +40,7 @@ export default function PlantCard({ plant, onPress }) {
         <Text style={styles.type}>{plant.type}</Text>
         <View style={styles.divider} />
 
-        <Text style={styles.meta}><Text style={styles.label}>Created:</Text> {plant.dateCreated}</Text>
-        <Text style={styles.meta}><Text style={styles.label}>Water:</Text> Every {plant.wateringFrequency} days</Text>
-        <Text style={styles.meta}><Text style={styles.label}>Fertilizer:</Text> {plant.fertReq}</Text>
-        <Text style={styles.meta}><Text style={styles.label}>Soil:</Text> {plant.soilReq}</Text>
-        <Text style={styles.meta}><Text style={styles.label}>Sunlight:</Text> {plant.sunReq}</Text>
-        <Text style={styles.meta}><Text style={styles.label}>Disease History:</Text> {plant.disHist}</Text>
-        <Text style={styles.meta}><Text style={styles.label}>Possible Diseases:</Text> {plant.disease}</Text>
-        <Text style={styles.meta}><Text style={styles.label}>Treatments:</Text> {plant.treatment}</Text>
+        <Text style={styles.meta}><Text style={styles.label}>Next watering:</Text> {getNextWateringDate()}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -40,6 +61,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.25,
     shadowRadius: 6,
+  },
+  topRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 12,
   },
   image: {
     width: 130,
