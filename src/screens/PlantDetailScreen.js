@@ -126,14 +126,14 @@ export default function PlantDetailScreen({ route, navigation }) {
               style={styles.buttonPrimary}
               onPress={() => navigation.navigate('AddEditPlant', { id: plant.id })}
             >
-              <Text style={styles.buttonText}>Edit Plant</Text>
+              <Text style={styles.buttonPrimaryText}>Edit Plant</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.buttonSecondary}
               onPress={handleDelete}
             >
-              <Text style={styles.buttonText}>Delete Plant</Text>
+              <Text style={styles.buttonSecondaryText}>Delete Plant</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -148,7 +148,7 @@ export default function PlantDetailScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#fffdfc',
+    backgroundColor: '#FFF8F3', //'#fffdfc',
   },
   scrollContainer: {
     padding: 20,
@@ -158,8 +158,8 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#ffffff',
     borderRadius: 16,
-    borderWidth: 2,
-    borderColor: '#d97a8d',
+    borderWidth: 1,
+    borderColor: '#4A2511', //'#d97a8d',
     padding: 24,
     width: '100%',
     maxWidth: 400,
@@ -175,8 +175,8 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     alignSelf: 'center',
     marginBottom: 16,
-    borderWidth: 2,
-    borderColor: '#6b9c4b',
+    borderWidth: 1.5,
+    borderColor: '#4A2511', //'#6b9c4b',
   },
   emojiContainer: {
     alignSelf: 'center',
@@ -197,38 +197,47 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 26,
     fontWeight: '700',
-    color: '#6b9c4b',
+    color: '#028a0f', //'#6b9c4b',
     marginBottom: 20,
     textAlign: 'center',
     letterSpacing: 0.5,
   },
   detail: {
     fontSize: 16,
-    color: '#34495E',
+    color: '#2E1503', //'#34495E',
     marginBottom: 10,
   },
   detailValue: {
     fontWeight: '600',
-    color: '#2C3E50',
+    color: '#4A3728', //'#2C3E50',
   },
   buttonContainer: {
     marginTop: 30,
   },
   buttonPrimary: {
-    backgroundColor: '#d97a8d',
+    backgroundColor: '#ffffff', //'#d97a8d',
     paddingVertical: 12,
-    borderRadius: 10,
+    borderRadius: 30,
     alignItems: 'center',
     marginBottom: 12,
+    borderWidth: 2,
+    borderColor: '#74b72e', //'#028a0f', //'#4A2511',
   },
   buttonSecondary: {
-    backgroundColor: '#8ebf66',
+    backgroundColor: '#ffffff', //'#8ebf66',
     paddingVertical: 12,
-    borderRadius: 10,
+    borderRadius: 30,
     alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#de3163', //'#e52b50', //'#4A2511',
   },
-  buttonText: {
-    color: '#ffffff',
+  buttonPrimaryText: {
+    color: '#74b72e', //'#028a0f',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  buttonSecondaryText: {
+    color: '#de3163', //'#e52b50',
     fontWeight: 'bold',
     fontSize: 16,
   },
