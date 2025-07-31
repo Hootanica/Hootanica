@@ -9,7 +9,8 @@ export default function InstructionsScreen({ navigation }) {
 
   const instructions = `
 **Add a plant** with its name, type, and photo.  
-  Click the "Add Plant" button and fill out the fields with the required information.
+  Click the "+ Add Plant" button and fill out the fields with the required information.
+  Give your plant a unique name, or keep it the same as its type!
 
 **Edit or delete existing plants.**  
   Click on the desired plant in the Home Page and then choose "Edit Plant" or "Delete Plant".
