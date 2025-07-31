@@ -23,7 +23,7 @@ export default function HomeScreen({ navigation }) {
       <StatusBar hidden={false} backgroundColor="white" barStyle="dark-content" translucent={Platform.OS === 'android'}/>
 
       <View style={styles.header}>
-        <Text style={styles.title}>Your Garden</Text>
+        <Text style={styles.title}>Hootanica</Text>
         <Text style={styles.subtitle}>Track and nurture your plants 🌿</Text>
       </View>
 
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 32,
-    color: '#d97a8d',
+    color: '#e52b50', //'#d97a8d',
   },
   emptySubText: {
     fontSize: 16,
