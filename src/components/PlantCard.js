@@ -32,28 +32,15 @@ export default function PlantCard({ plant, onPress }) {
 
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
-      <View style={styles.topRow}>
-        {plant.photo ? (
-          <Image source={{ uri: plant.photo }} style={styles.image} />
-        ) : plant.plantEmoji ? (
-          <View style={styles.emojiContainer}>
-            <Text style={styles.emoji}>{plant.plantEmoji}</Text>
-          </View>
-        ) : (
-          <View style={styles.placeholderContainer}>
-            <Text style={styles.placeholderEmoji}>🌱</Text>
-          </View>
-        )}
-        
-        <View style={styles.info}>
-          <Text style={styles.name}>{plant.name}</Text>
-          <Text style={styles.type}>Type: {plant.type}</Text>
-        </View>
-      </View>
-      
-      <View style={styles.wateringInfo}>
-        <Text style={styles.meta}>Water every {plant.wateringFrequency} days</Text>
-        <Text style={styles.meta}>Next watering: {getNextWateringDate()}</Text>
+      {plant.photo && (
+        <Image source={{ uri: plant.photo }} style={styles.image} />
+      )}
+      <View style={styles.info}>
+        <Text style={styles.name}>{plant.name}</Text>
+        <Text style={styles.type}>{plant.type}</Text>
+        <View style={styles.divider} />
+
+        <Text style={styles.meta}><Text style={styles.label}>Next watering:</Text> {getNextWateringDate()}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -61,17 +48,19 @@ export default function PlantCard({ plant, onPress }) {
 
 const styles = StyleSheet.create({
   card: {
-    padding: 16,
-    marginVertical: 8,
-    backgroundColor: '#d97a8d', //'#fffdfc', // soft off-white
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#d97a8d', //'#eedac9', // blush earth tone
-    elevation: 2,
-    shadowColor: '#6b9c4b',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
+    flexDirection: 'row',
+    backgroundColor: '#FFF8F3', //'#EBF5F0', // soft warm white
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#4A2511', // pecan
+    overflow: 'hidden',
+    marginVertical: 10,
+    marginHorizontal: 16,
+    elevation: 5,
+    shadowColor: '#A67B5B', // cafe au lait
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
   },
   topRow: {
     flexDirection: 'row',
@@ -79,59 +68,41 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   image: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    marginRight: 16,
-    borderWidth: 2,
-    borderColor: 'white',
-  },
-  emojiContainer: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    marginRight: 16,
-    borderWidth: 2,
-    borderColor: 'white',
-    backgroundColor: '#f8fff4',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  emoji: {
-    fontSize: 24,
-  },
-  placeholderContainer: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    marginRight: 16,
-    borderWidth: 2,
-    borderColor: 'white',
-    backgroundColor: '#f8fff4',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  placeholderEmoji: {
-    fontSize: 24,
+    width: 130,
+    height: '100%',
+    borderTopLeftRadius: 16,
+    borderBottomLeftRadius: 16,
   },
   info: {
     flex: 1,
+    padding: 14,
+    justifyContent: 'center',
   },
   name: {
-    fontSize: 17,
-    fontWeight: '700',
-    color: 'white', //'#2C3E50', // main heading color
-    marginBottom: 4,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#2E1503', // dark chocolate
+    marginBottom: 2,
   },
   type: {
-    fontSize: 15,
-    color: 'white', //'#6b9c4b', // leaf green for subtle contrast
-    fontWeight: '500',
+    fontSize: 14,
+    color: '#E52B50', //amaranth pink '#bb5d64', // soft amaranth
+    marginBottom: 8,
+    fontStyle: 'italic',
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#D3B49C', // soft cafe au lait
+    marginVertical: 8,
   },
   meta: {
     fontSize: 14,
-    color: 'white',
-    marginBottom: 4,
-    lineHeight: 18,
+    color: '#4A3728', // cedar brown
+    marginBottom: 5,
+    lineHeight: 20,
+  },
+  label: {
+    fontWeight: '600',
+    color: '#2E1503',
   },
 });

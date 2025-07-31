@@ -12,70 +12,122 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PlantContext from '../context/PlantContext';
 import PlantCard from '../components/PlantCard';
-import { commonStyles } from '../styles/commonStyles';
 import NavBar from '../components/NavBar';
-
 
 export default function HomeScreen({ navigation }) {
   const { plants } = useContext(PlantContext);
   const insets = useSafeAreaInsets();
 
   return (
-    <SafeAreaView style={commonStyles.container}>
-      <StatusBar 
-        hidden={false} 
-        backgroundColor="white" 
-        barStyle="dark-content"
-        translucent={Platform.OS === 'android'}
-      />
-      
-      <View style={[
-        commonStyles.scrollSection,
-        { paddingTop: Platform.OS === 'android' ? insets.top + 16 : 16 }
-      ]}>
-        <FlatList
-          data={plants}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <PlantCard
-              plant={item}
-              onPress={() => navigation.navigate('PlantDetail', { id: item.id })}
-            />
-          )}
-          contentContainerStyle={[
-            commonStyles.scrollContainer,
-            plants.length === 0 && styles.emptyContainer,
-          ]}
-          ListEmptyComponent={
-            <Text style={styles.emptyText}>No plants yet. Add your first one!</Text>
-          }
-          showsVerticalScrollIndicator={false}
-        />
+    <SafeAreaView style={styles.container}>
+      <StatusBar hidden={false} backgroundColor="white" barStyle="dark-content" translucent={Platform.OS === 'android'}/>
+
+      <View style={styles.header}>
+        <Text style={styles.title}>Your Garden</Text>
+        <Text style={styles.subtitle}>Track and nurture your plants 🌿</Text>
       </View>
 
-      <View style={[commonStyles.buttonContainer, { paddingBottom: insets.bottom }]}>
+      <FlatList
+        data={plants}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <PlantCard
+            plant={item}
+            onPress={() => navigation.navigate('PlantDetail', { id: item.id })}
+          />
+        )}
+        contentContainerStyle={[
+          styles.listContainer,
+          plants.length === 0 && styles.emptyContainer,
+        ]}
+        ListEmptyComponent={
+          <View style={styles.emptyState}>
+            <Text style={styles.emptyIcon}>🪴</Text>
+            <Text style={styles.emptyText}>No plants yet.</Text>
+            <Text style={styles.emptySubText}>Start growing your digital garden by adding one!</Text>
+          </View>
+        }
+        showsVerticalScrollIndicator={false}
+      />
+
+      <View style={[styles.buttonContainer, { paddingBottom: insets.bottom + 10 }]}>
         <TouchableOpacity
-          style={commonStyles.primaryButton}
+          style={styles.primaryButton}
           onPress={() => navigation.navigate('AddEditPlant')}
         >
-          <Text style={commonStyles.buttonText}>Add Plant</Text>
+          <Text style={styles.buttonText}>＋ Add Plant</Text>
         </TouchableOpacity>
       </View>
-      <NavBar navigation={navigation}/>
+
+      <NavBar navigation={navigation} />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  emptyContainer: {
+  container: {
     flex: 1,
-    padding: 16,
+    backgroundColor: '#FFF8F3',
+  },
+  header: {
+    paddingTop: 30,
+    paddingBottom: 10,
+    paddingHorizontal: 20,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#2E1503',
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#4A3728',
+    marginTop: 4,
+  },
+  listContainer: {
+    paddingHorizontal: 16,
+    paddingBottom: 20,
+  },
+  emptyContainer: {
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  emptyState: {
+    alignItems: 'center',
+    paddingHorizontal: 30,
+    marginTop: 60,
+  },
+  emptyIcon: {
+    fontSize: 60,
+    marginBottom: 10,
   },
   emptyText: {
     fontSize: 32,
     color: '#d97a8d',
+  },
+  emptySubText: {
+    fontSize: 16,
+    color: '#4A3728',
     textAlign: 'center',
+  },
+  buttonContainer: {
+    alignItems: 'center',
+    paddingTop: 10,
+    backgroundColor: '#FFF8F3',
+  },
+  primaryButton: {
+    backgroundColor: '#FFF8F3', //'#d97a8d',
+    borderWidth: 2,
+    borderColor: '#4A2511',
+    paddingVertical: 14,
+    paddingHorizontal: 30,
+    borderRadius: 30,
+    elevation: 2,
+  },
+  buttonText: {
+    color: '#028a0f', //'#fff',
+    fontWeight: '600',
+    fontSize: 16,
   },
 });

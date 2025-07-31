@@ -179,6 +179,7 @@ const renderCalendar = () => {
   return (
     <View style={styles.container}>
       <LinearGradient
+        //colors={["#e52b50", "#028a0f"]}
         colors={["#d97a8d", "#6b9c4b"]} // #1a8e2d
         style={styles.headerGradient}
         start={{ x: 0, y: 0 }}
