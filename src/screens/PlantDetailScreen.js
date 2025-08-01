@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#74b72e',
     borderStyle: 'dashed',
-    backgroundColor: '#f8fff4',
+    backgroundColor: '#fff8f3', //'#f8fff4',
   },
   plantEmoji: {
     fontSize: 60,

@@ -333,6 +333,8 @@ const styles = StyleSheet.create({
   calendarContainer: {
     backgroundColor: "#ffffff",
     borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#4a2511',
     margin: 20,
     padding: 15,
     shadowColor: "#000",
@@ -350,7 +352,7 @@ const styles = StyleSheet.create({
   monthText: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#6b9c4b", // leaf green
+    color: "#74b72e", // leaf green
   },
   weekdayHeader: {
     flexDirection: "row",
@@ -381,11 +383,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#d97a8d25", // light petal pink background
   },
   todayText: {
-    color: "#d97a8d",
+    color: "#de3163",
     fontWeight: "600",
   },
   selectedDay: {
-    backgroundColor: "#d97a8d", // petal pink highlight
+    backgroundColor: "#de3163", // petal pink highlight
   },
   selectedDayText: {
     color: "#ffffff",
@@ -437,7 +439,7 @@ const styles = StyleSheet.create({
   scheduleTitle: {
     fontSize: 20,
     fontWeight: "700",
-    color: "#6b9c4b", // leaf green for headline
+    color: "#74b72e", // leaf green for headline
     flex: 1,
   },
   plantBanner: {
@@ -448,7 +450,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     borderRadius: 10,
     borderWidth: 1.5,
-    borderColor: '#d97a8b',
+    borderColor: '#de3163',
     elevation: 1,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
