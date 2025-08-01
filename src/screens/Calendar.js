@@ -179,8 +179,8 @@ const renderCalendar = () => {
   return (
     <View style={styles.container}>
       <LinearGradient
-        //colors={["#e52b50", "#028a0f"]}
-        colors={["#d97a8d", "#6b9c4b"]} // #1a8e2d
+        colors={["#DE3163", "#74b72e"]}
+        //colors={["#d97a8d", "#6b9c4b"]} // #1a8e2d
         style={styles.headerGradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
@@ -290,7 +290,7 @@ const renderCalendar = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fffdfc", // match common container
+    backgroundColor: '#FFF8F3', //"#fffdfc", // match common container
   },
   headerGradient: {
     position: "absolute",

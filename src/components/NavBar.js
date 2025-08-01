@@ -7,7 +7,7 @@ export default function NavBar( { navigation }) {
   return (
     <View style={styles.navBar}>
       <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Home')}>
-        <Icon name="leaf-outline" size={22} color="#028a0f" />
+        <Icon name="leaf-outline" size={22} color="#74b72e" />
         <Text style={styles.label}>Plants</Text>
       </TouchableOpacity>
 
@@ -17,7 +17,7 @@ export default function NavBar( { navigation }) {
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Instructions')}>
-        <Icon name="help-circle-outline" size={22} color="#E52B50" />
+        <Icon name="help-circle-outline" size={22} color="#DE3163" />
         <Text style={styles.label}>Help</Text>
       </TouchableOpacity>
     </View>

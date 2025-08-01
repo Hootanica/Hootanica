@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
 
 const markdownStyles = {
   heading1: {
-    color: '#028a0f',
+    color: '#74b72e',
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',

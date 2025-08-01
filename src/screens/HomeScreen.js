@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 32,
-    color: '#e52b50', //'#d97a8d',
+    color: '#DE3163', //'#e52b50', //'#d97a8d',
   },
   emptySubText: {
     fontSize: 16,
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonText: {
-    color: '#028a0f', //'#fff',
+    color: '#74b72e', //'#028a0f', //'#fff',
     fontWeight: '600',
     fontSize: 16,
   },
