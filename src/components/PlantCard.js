@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   type: {
     fontSize: 14,
-    color: '#E52B50', //amaranth pink '#bb5d64', // soft amaranth
+    color: '#DE3163', //amaranth pink '#bb5d64', // soft amaranth
     marginBottom: 8,
     fontStyle: 'italic',
   },
