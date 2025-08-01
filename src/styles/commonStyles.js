@@ -9,37 +9,41 @@ export const commonStyles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
     paddingTop: 16,
-    backgroundColor: 'white', //'#fffdfc', // pale green-pink mix
+    backgroundColor: '#fff8f3', //'#fffdfc', // pale green-pink mix
   },
   scrollContainer: {
     paddingBottom: 20,
   },
   buttonContainer: {
-    backgroundColor: '#fffdfc',
+    backgroundColor: '#fff8f3',
     paddingHorizontal: 16,
     paddingTop: 10,
   },
   primaryButton: {
-    backgroundColor: '#8ebf66', //'#d97a8d', // petal pink
+    backgroundColor: '#fff8f3', //'#d97a8d', // petal pink
     paddingVertical: 12,
-    borderRadius: 10,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: '#4A2511',
     alignItems: 'center',
     marginBottom: 10,
   },
   secondaryButton: {
-    backgroundColor: '#d97a8d', //'#8ebf66', // sprout green
+    backgroundColor: '#fff8f3', //'#8ebf66', // sprout green
     paddingVertical: 12,
-    borderRadius: 10,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: '#4A2511',
     alignItems: 'center',
     marginBottom: 10,
   },
   buttonText: {
-    color: 'white', //'#ffffff', // white text on colored buttons
+    color: '#74b72e', //'#ffffff', // white text on colored buttons
     fontWeight: 'bold',
     fontSize: 16,
   },
   secondaryButtonText: {
-    color: '#ffffff', // white on green
+    color: '#de3163', // white on green
     fontWeight: 'bold',
     fontSize: 16,
   },

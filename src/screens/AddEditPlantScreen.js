@@ -268,7 +268,7 @@ export default function AddEditPlantScreen({ navigation, route }) {
 
   return (
     <SafeAreaView style={[
-      commonStyles.container,
+      styles.container,
       Platform.OS === 'android' && { paddingTop: 0 }
     ]}>
       <StatusBar 
@@ -494,37 +494,40 @@ export default function AddEditPlantScreen({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff8f3',
+  },
   title: {
     fontSize: 28,
     fontWeight: '700',
     marginBottom: 24,
     textAlign: 'center',
-    color: '#6b9c4b', // leaf green for continuity
-    letterSpacing: 0.5,
+    color: '#2E1503',
   },
   formGroup: {
     marginBottom: 18,
   },
   label: {
-    fontSize: 15,
-    fontWeight: '500',
+    fontSize: 16,
+    fontWeight: '600',
     marginBottom: 6,
-    color: '#d97a8d', //'#8ebf66', // sprout green for gentle contrast
+    color: '#4A3728',
     paddingLeft: 4,
   },
   required: {
-    color: '#e74c3c',
+    color: '#de3163',
     fontWeight: 'bold',
   },
   input: {
     borderWidth: 1,
-    borderColor: 'gray', //'#d97a8d', // petal pink border
-    borderRadius: 10,
+    borderColor: '#4A2511',
+    borderRadius: 12,
     paddingVertical: 12,
     paddingHorizontal: 16,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fff',
     fontSize: 15,
-    color: '#2D3436', // neutral readable base
+    color: '#4A3728',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
@@ -532,11 +535,11 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   inputError: {
-    borderColor: '#e74c3c',
+    borderColor: '#de3163',
     borderWidth: 2,
   },
   errorText: {
-    color: '#e74c3c',
+    color: '#de3163',
     fontSize: 12,
     marginTop: 4,
     paddingLeft: 4,
@@ -548,11 +551,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 160,
     height: 160,
-    borderRadius: 16,
+    borderRadius: 18,
     borderWidth: 2,
-    borderColor: '#6b9c4b',
+    borderColor: '#74b72e',
     borderStyle: 'dashed',
-    backgroundColor: '#f8fff4',
+    backgroundColor: '#fffdfc',
   },
   emojiText: {
     fontSize: 60,
@@ -560,7 +563,7 @@ const styles = StyleSheet.create({
   },
   emojiLabel: {
     fontSize: 14,
-    color: '#6b9c4b',
+    color: '#4A3728',
     fontWeight: '500',
     textAlign: 'center',
   },
@@ -572,9 +575,9 @@ const styles = StyleSheet.create({
   image: {
     width: 160,
     height: 160,
-    borderRadius: 16,
+    borderRadius: 18,
     borderWidth: 2,
-    borderColor: '#6b9c4b', // leafy framing
+    borderColor: '#74b72e',
   },
   deleteImageButton: {
     position: 'absolute',
@@ -583,7 +586,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#e74c3c',
+    backgroundColor: '#de3163',
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
@@ -606,10 +609,10 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   emojiPickerContainer: {
-    backgroundColor: 'white',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    padding: 20,
+    backgroundColor: '#fff8f3',
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    padding: 24,
     width: '100%',
     maxHeight: '70%',
   },
@@ -617,12 +620,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 16,
   },
   emojiPickerTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#6b9c4b',
+    color: '#2E1503',
   },
   closeButton: {
     padding: 5,
@@ -636,12 +639,46 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: 8,
-    borderRadius: 10,
-    backgroundColor: '#f8fff4',
+    borderRadius: 12,
+    backgroundColor: '#fff8f3',
     borderWidth: 1,
-    borderColor: '#e0e0e0',
+    borderColor: '#4A2511',
   },
   emojiItemText: {
     fontSize: 32,
+  },
+  buttonContainer: {
+    padding: 16,
+    backgroundColor: '#fff8f3',
+    borderTopWidth: 1,
+    borderColor: '#4A2511',
+  },
+  primaryButton: {
+    backgroundColor: '#74b72e',
+    paddingVertical: 14,
+    borderRadius: 14,
+    alignItems: 'center',
+    marginTop: 10,
+    elevation: 2,
+  },
+  secondaryButton: {
+    backgroundColor: '#fff',
+    paddingVertical: 14,
+    borderRadius: 14,
+    alignItems: 'center',
+    marginTop: 10,
+    elevation: 1,
+    borderColor: '#74b72e',
+    borderWidth: 1.2,
+  },
+  buttonText: {
+    color: '#fff8f3',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  secondaryButtonText: {
+    color: '#74b72e',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
