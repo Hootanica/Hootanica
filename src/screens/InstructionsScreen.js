@@ -9,7 +9,7 @@ export default function InstructionsScreen({ navigation }) {
   const instructions = `
 
 **🌱 Add a plant**  
-Tap **"+ Add Plant"** to enter your plant’s name, type, and photo.  
+Tap **"+ Add Plant"** to enter your plant’s name, type, photo, and other information.  
 Give your plant a unique name or use the type — it's up to you!
 
 ---
@@ -30,7 +30,7 @@ Visit the **Calendar** tab to see daily tasks and care schedules.
 ---
 
 **🔔 Enable reminders**  
-Get gentle notifications when it's time to water or fertilize.
+Get gentle notifications when it's time to water your plants.
 `;
 
   return (
