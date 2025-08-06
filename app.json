@@ -21,12 +21,15 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "navigationBar": {
-        "visible": "immersive"
-      }
+      "package": "com.hootanica.hootanica"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "086c8fe5-6bd9-45a0-8a44-49891eb47085"
+      }
     }
   }
 }
